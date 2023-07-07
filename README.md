@@ -13,11 +13,11 @@ To run the code, you need to prepare the sequence data for each chromosome (hg19
    
 	i. TableS11 from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020)
 	
- 	ii. TableS4 from this manuscript, data is copied to [resources]()
+ 	ii. TableS4 from this manuscript, data is copied to [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
 	
  	iii. Hi-C data (inter_30.hic) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
 
-	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript in [resources]()
+	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
 
 3. then generate the {inter_prob} file for each chromosome using the following commands:
 
