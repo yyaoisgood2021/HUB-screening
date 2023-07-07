@@ -19,7 +19,7 @@ To run the code, you need to prepare the sequence data for each chromosome (hg19
 
 	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
 
-3. then generate the {inter_prob} file for each chromosome using the following commands:
+2. then generate the {inter_prob} file for each chromosome using the following commands:
 
 ```bash
 chrid=`enter chr1 ~ chrX here`
@@ -33,7 +33,8 @@ paste path/to/save_folder/VC_observed.${chrid}.5000.txt path/to/save_folder/VC_o
 path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5000.txt path/to/save_folder/${chrid}_K562_prob.5000.txt
 
 ```
-3. then run the code to perform PageRank and LR
+3. then generate fragment contact network (FCN) for each chromosome according to procedure:
+
 
 
 ### "Simple path analysis on the hub pairs"
