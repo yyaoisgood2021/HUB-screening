@@ -19,7 +19,7 @@ To run `CNN-AE-LR`, you need to prepare the sequence data for each chromosome (h
 
 	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
 
-2. then generate the {inter_prob} file for each chromosome using the following bash commands:
+2. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands:
 
 ```bash
 chrid=`enter chr1 ~ chrX here`
@@ -38,6 +38,11 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 	i. run `generate_eligible_coords` for each chr
 
  	ii. run the following bash commands to generate node_meta
+
+	```bash
+	bedtools # use bedtools intersect to find overlap of the peaks then make meta node files on the server, then save to folder
+ 
+	```
 
 ### "Simple path analysis on the hub pairs"
 
