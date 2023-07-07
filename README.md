@@ -11,13 +11,13 @@ To run `CNN-AE-LR`, you need to prepare the sequence data for each chromosome (h
 
 1. you need to download the following data:
    
-	i. TableS11 from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020)
+	i. `TableS11` from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020)
 	
- 	ii. TableS4 from this manuscript, data is copied to [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
+ 	ii. `TableS4` from this manuscript, data is copied to [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
 	
- 	iii. Hi-C data (inter_30.hic) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
+ 	iii. Hi-C data (`inter_30.hic`) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
 
-	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
+	iv. Download the feature data in the bed format, refer to `TableS12` and `download_chip_dt.txt` from this manuscript in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
 
 2. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands:
 
@@ -37,11 +37,12 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 
 	i. run `generate_eligible_coords` for each chr
 
- 	ii. run the following bash commands to generate node_meta
+ 	ii. run the following bash commands to generate node_meta, for each chromosome, for each feature
 
 	```bash
-	bedtools # use bedtools intersect to find overlap of the peaks then make meta node files on the server, then save to folder
- 
+	bedtools intersect -a path/to/eligible_coords.${chrid}.bed -b path/to/{feature}.bed_peak_file -wao > path/to/save_folder/overlap.{feature}.{chrid}.bed
+
+ 	path/to/python scripts/prep_node_meta.py
 	```
 
 ### "Simple path analysis on the hub pairs"
