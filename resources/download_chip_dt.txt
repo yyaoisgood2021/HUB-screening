@@ -1,0 +1,23 @@
+index	experiment	feature	rep	accession	institution	url	peak_type	assembly
+1	ChIP-seq	CTCF	1	ENCFF002CEL	broad	https://www.encodeproject.org/files/ENCFF002CEL/@@download/ENCFF002CEL.bed.gz	narrow	19
+1	ChIP-seq	CTCF	2	ENCFF738TKN	Stanford	https://www.encodeproject.org/files/ENCFF738TKN/@@download/ENCFF738TKN.bed.gz	narrow	19
+2	ChIP-seq	RAD21	1	ENCFF001VOM	Yale	https://www.encodeproject.org/files/ENCFF001VOM/@@download/ENCFF001VOM.bed.gz	narrow	19
+2	ChIP-seq	RAD21	2	ENCFF330SHG	Stanford	https://www.encodeproject.org/files/ENCFF330SHG/@@download/ENCFF330SHG.bed.gz	narrow	38
+3	ChIP-seq	SMC3	1	ENCFF041YQC	Stanford	https://www.encodeproject.org/files/ENCFF041YQC/@@download/ENCFF041YQC.bed.gz	narrow	19
+4	ChIP-seq	H3K27ac	1	ENCFF044JNJ	Broad	https://www.encodeproject.org/files/ENCFF044JNJ/@@download/ENCFF044JNJ.bed.gz	narrow	19
+5	ChIP-seq	H3K27me3	1	ENCFF126QYP	usc	https://www.encodeproject.org/files/ENCFF126QYP/@@download/ENCFF126QYP.bed.gz	narrow	19
+5	ChIP-seq	H3K27me3	2	ENCFF001SZF	broad	https://www.encodeproject.org/files/ENCFF001SZF/@@download/ENCFF001SZF.bed.gz	broad	19
+6	ChIP-seq	H3K36me3	1	ENCFF676RWX	UW	https://www.encodeproject.org/files/ENCFF676RWX/@@download/ENCFF676RWX.bed.gz	narrow	19
+6	ChIP-seq	H3K36me3	2	ENCFF498CMP	broad	https://www.encodeproject.org/files/ENCFF498CMP/@@download/ENCFF498CMP.bed.gz	narrow	19
+6	ChIP-seq	H3K36me3	3	ENCFF001SZG	broad	https://www.encodeproject.org/files/ENCFF001SZG/@@download/ENCFF001SZG.bed.gz	broad	19
+7	ChIP-seq	H3K4me1	1	ENCFF730VTO	usc	https://www.encodeproject.org/files/ENCFF730VTO/@@download/ENCFF730VTO.bed.gz	narrow	19
+7	ChIP-seq	H3K4me1	2	ENCFF183UQD	broad	https://www.encodeproject.org/files/ENCFF183UQD/@@download/ENCFF183UQD.bed.gz	narrow	19
+8	ChIP-seq	H3K4me2	1	ENCFF099LMD	broad	https://www.encodeproject.org/files/ENCFF099LMD/@@download/ENCFF099LMD.bed.gz	narrow	19
+9	ChIP-seq	H3K4me3	1	ENCFF737AMS	broad	https://www.encodeproject.org/files/ENCFF737AMS/@@download/ENCFF737AMS.bed.gz	narrow	19
+9	ChIP-seq	H3K4me3	2	ENCFF883POK	usc	https://www.encodeproject.org/files/ENCFF883POK/@@download/ENCFF883POK.bed.gz	narrow	19
+10	ChIP-seq	H3K9ac	1	ENCFF173ULG	broad	https://www.encodeproject.org/files/ENCFF173ULG/@@download/ENCFF173ULG.bed.gz	narrow	19
+10	ChIP-seq	H3K9ac	2	ENCFF085JHT	usc	https://www.encodeproject.org/files/ENCFF085JHT/@@download/ENCFF085JHT.bed.gz	narrow	19
+11	ChIP-seq	H3K9me3	1	ENCFF894VEM	broad	https://www.encodeproject.org/files/ENCFF894VEM/@@download/ENCFF894VEM.bed.gz	narrow	19
+11	ChIP-seq	H3K9me3	2	ENCFF001SZN	broad	https://www.encodeproject.org/files/ENCFF001SZN/@@download/ENCFF001SZN.bed.gz	broad	19
+12	ChIP-seq	H4K20me1	1	ENCFF139CKE	Broad	https://www.encodeproject.org/files/ENCFF139CKE/@@download/ENCFF139CKE.bed.gz	narrow	19
+13	n/a	black-list	1	n/a		https://github.com/Boyle-Lab/Blacklist/blob/master/lists/hg19-blacklist.v2.bed.gz	no	19
