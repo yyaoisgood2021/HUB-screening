@@ -45,7 +45,9 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
  	path/to/python scripts/prep_node_meta.py path/to/coord_save_folder path/to/overlap_save_folder path/to/node_meta_save_folder
 	```
 
- 	iii. run `PR-LR` to build FCNs, and perform PR and LR
+ 	iii. run `PR` to build FCNs, and perform PR 
+
+	iv. run `LR` to train a LR classifer for hub essentiality
 
 ### "Simple path analysis on the hub pairs"
 
