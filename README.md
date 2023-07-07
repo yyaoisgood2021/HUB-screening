@@ -35,7 +35,9 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 ```
 3. then generate fragment contact network (FCN) for each chromosome according to procedure:
 
+	i. run generate_eligible_coords for each chr
 
+ 	ii. 
 
 ### "Simple path analysis on the hub pairs"
 
