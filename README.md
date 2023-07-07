@@ -4,7 +4,7 @@ This is the codes for the manuscript: "Distinct 3D contacts and phenotypic conse
 
 ### "Constructing and training of logistic regression to facilitate candidate selection"
 
-To run the code, you need to prepare the sequence data for each chromosome (hg19): download from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/), and save files to resources/hg19
+To run `CNN-AE-LR`, you need to prepare the sequence data for each chromosome (hg19): download from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/), and save files to resources/hg19
 
 
 ### "Classifying hub essentiality with sequence and epigenetic features"
@@ -19,7 +19,7 @@ To run the code, you need to prepare the sequence data for each chromosome (hg19
 
 	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
 
-2. then generate the {inter_prob} file for each chromosome using the following commands:
+2. then generate the {inter_prob} file for each chromosome using the following bash commands:
 
 ```bash
 chrid=`enter chr1 ~ chrX here`
@@ -35,9 +35,9 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 ```
 3. then generate fragment contact network (FCN) for each chromosome according to procedure:
 
-	i. run generate_eligible_coords for each chr
+	i. run `generate_eligible_coords` for each chr
 
- 	ii. 
+ 	ii. run the following bash commands to generate node_meta
 
 ### "Simple path analysis on the hub pairs"
 
