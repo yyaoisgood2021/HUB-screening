@@ -4,21 +4,20 @@ This is the codes for the manuscript: "Distinct 3D contacts and phenotypic conse
 
 ### "Constructing and training of logistic regression to facilitate candidate selection"
 
-To run the code, you need to prepare the sequence data for each chromosome (hg19): download from 
-"https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/", and save files to resources/hg19
+To run the code, you need to prepare the sequence data for each chromosome (hg19): download from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/), and save files to resources/hg19
 
 
 ### "Classifying hub essentiality with sequence and epigenetic features"
 
 1. you need to download the following data:
    
-	i. TableS11 from Ding et al. study (DOI: 10.1126/sciadv.abi6020)\n
+	i. TableS11 from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020)
 	
- 	ii. TableS4 from this manuscript
+ 	ii. TableS4 from this manuscript, data is copied to [resources]()
 	
- 	iii. Hi-C data (inter_30.hic) from (DOI: 10.1016/j.cell.2014.11.021)
+ 	iii. Hi-C data (inter_30.hic) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
 
-	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript 
+	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript in [resources]()
 
 3. then generate the {inter_prob} file for each chromosome using the following commands:
 
@@ -35,7 +34,6 @@ path/to/python script/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.50
 
 ```
 3. then run the code to perform PageRank and LR
-
 
 
 ### "Simple path analysis on the hub pairs"
