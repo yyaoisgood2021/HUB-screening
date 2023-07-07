@@ -35,22 +35,26 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 ```
 3. then generate fragment contact network (FCN) for each chromosome according to procedure:
 
-	i. run `generate_eligible_coords` for each chr
+	i. run `generate_eligible_coords` for each chr and put the results in `coord_save_folder`
 
  	ii. run the following bash commands to generate node_meta, for each chromosome, for each feature
 
 	```bash
-	bedtools intersect -a path/to/eligible_coords.${chrid}.bed -b path/to/{feature}.bed_peak_file -wao > path/to/save_folder/overlap.{feature}.{chrid}.bed
+	bedtools intersect -a path/to/eligible_coords.${chrid}.bed -b path/to/{feature}.bed_peak_file -wao > path/to/overlap_save_folder/overlap.{feature}.{chrid}.bed
 
- 	path/to/python scripts/prep_node_meta.py
+ 	path/to/python scripts/prep_node_meta.py path/to/coord_save_folder path/to/overlap_save_folder path/to/node_meta_save_folder
 	```
+
+ 	iii. run `PR-LR` to build FCNs, and perform PR and LR
 
 ### "Simple path analysis on the hub pairs"
 
 run the code to build FCN 
 
 
-
+coord_folder = sys.argv[1]
+overlap_folder = sys.argv[2]
+result_sv_folder = sys.argv[3]
 
 ### "Entropy analysis for chromatin accessibility"
 
