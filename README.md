@@ -38,6 +38,10 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 
 ### "Simple path analysis on the hub pairs"
 
+run the code to build FCN
+
+
+
 
 ### "Entropy analysis for chromatin accessibility"
 
