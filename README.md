@@ -30,7 +30,7 @@ java -jar path/to/juicer_tools.jar dump oe VC path/to/inter_30.hic ${chrid} ${ch
 
 paste path/to/save_folder/VC_observed.${chrid}.5000.txt path/to/save_folder/VC_oe.${chrid}.5000.txt | awk '{print $1 "\t" $2 "\t" $3 "\t" $6 "\t" $3 / $6}' > path/to/save_folder/VC_combined.${chrid}.5000.txt
 
-path/to/python script/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5000.txt path/to/save_folder/${chrid}_K562_prob.5000.txt
+path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5000.txt path/to/save_folder/${chrid}_K562_prob.5000.txt
 
 ```
 3. then run the code to perform PageRank and LR
