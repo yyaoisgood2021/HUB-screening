@@ -11,7 +11,7 @@ To run the code, you need to prepare the sequence data for each chromosome (hg19
 "Classifying hub essentiality with sequence and epigenetic features"
 
 1. you need to download the following data:
-	i. TableS11 from Ding et al. study (DOI: 10.1126/sciadv.abi6020)
+	i. TableS11 from Ding et al. study (DOI: 10.1126/sciadv.abi6020)\n
 	
  	ii. TableS4 from this manuscript
 	
