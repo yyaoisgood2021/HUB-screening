@@ -1,6 +1,6 @@
 # HUB-screening
 
-This is the codes for the manuscript: "Distinct 3D contacts and phenotypic consequences of adjacent non-coding loci in the epigenetically quiescent regions" to implement to following sections:
+This is the code for the manuscript: "Distinct 3D contacts and phenotypic consequences of adjacent non-coding loci in the epigenetically quiescent regions" to implement to following sections:
 
 ### "Constructing and training of logistic regression to facilitate candidate selection"
 
