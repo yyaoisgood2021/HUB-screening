@@ -47,7 +47,7 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 
  	iii. run `PR` to build FCNs, and perform PR 
 
-	iv. run `LR` to train a LR classifer for hub essentiality
+	iv. run `LR` to train a LR classifer for hub essentiality (you may want to modify the codes)
 
 ### "Simple path analysis on the hub pairs"
 
