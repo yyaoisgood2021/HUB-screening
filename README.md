@@ -51,12 +51,7 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 
 ### "Simple path analysis on the hub pairs"
 
-run the code to build FCN 
-
-
-coord_folder = sys.argv[1]
-overlap_folder = sys.argv[2]
-result_sv_folder = sys.argv[3]
+run `FCN_analysis` to repeat analysis in the manuscript
 
 ### "Entropy analysis for chromatin accessibility"
 
