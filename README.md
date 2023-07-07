@@ -11,6 +11,7 @@ To run the code, you need to prepare the sequence data for each chromosome (hg19
 "Classifying hub essentiality with sequence and epigenetic features"
 
 1. you need to download the following data:
+   
 	i. TableS11 from Ding et al. study (DOI: 10.1126/sciadv.abi6020)\n
 	
  	ii. TableS4 from this manuscript
@@ -19,7 +20,7 @@ To run the code, you need to prepare the sequence data for each chromosome (hg19
 
 	iv. Download the feature data in the bed format, refer to TableS12 from this manuscript 
 
-2. then generate the {inter_prob} file for each chromosome using the following commands:
+3. then generate the {inter_prob} file for each chromosome using the following commands:
 
 remember to replace {chrid} with chr1 to chrX
 
