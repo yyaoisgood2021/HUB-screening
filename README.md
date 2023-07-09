@@ -77,7 +77,7 @@ format of `coord file`:
     ```bash
     bedtools intersect -wao -a `coord file` -b `bedgraph file` > `overlap file save path`
     ```
-you will get a file of the overlapped results, and it should have 8 columns
+	you will get a file of the overlapped results, and it should have 8 columns
 
 4. run `calc_entropy_genome1D.py` with the following command:
     ```bash
