@@ -2,14 +2,14 @@
 
 This is the code for the manuscript: "Distinct 3D contacts and phenotypic consequences of adjacent non-coding loci in the epigenetically quiescent regions" to implement to following sections:
 
-### "Constructing and training of logistic regression to facilitate candidate selection"
+### Section 1 "Constructing and training of logistic regression to facilitate candidate selection"
 
 To run `CNN-AE-LR`, you need to prepare the sequence data for each chromosome (hg19): download from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/), and save files to resources/hg19/
 
 Then, you can run codes in scripts/CNN-AE-LR.ipynb
 
 
-### "Classifying hub essentiality with sequence and epigenetic features"
+### Section 2 "Classifying hub essentiality with sequence and epigenetic features"
 
 1. you need to download the following data:
    
@@ -51,11 +51,11 @@ path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5
 
 	iv. run `LR` to train a LR classifer for hub essentiality (you may want to modify the codes)
 
-### "Simple path analysis on the hub pairs"
+### Section 3 "Simple path analysis on the hub pairs"
 
 run `FCN_analysis` to repeat analysis in the manuscript
 
-### "Entropy analysis for chromatin accessibility"
+### Section 4 "Entropy analysis for chromatin accessibility"
 
 to calculate entropy, you need to prepare `overlapped_data` according to the procedures below: 
 
