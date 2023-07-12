@@ -26,7 +26,7 @@ To run codes in this section, you need to install [juicer](https://github.com/ai
 2. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands:
 
 ```bash
-chrid=`enter chr1 ~ chrX here`
+chrid=chr1 # change this value for different chromosomes
 
 java -jar path/to/juicer_tools.jar dump observed VC path/to/inter_30.hic ${chrid} ${chrid} BP 5000 path/to/save_folder/VC_observed.${chrid}.5000.txt
 
