@@ -6,6 +6,8 @@ This is the code for the manuscript: "Distinct 3D contacts and phenotypic conseq
 
 To run `CNN-AE-LR`, you need to prepare the sequence data for each chromosome (hg19): download from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/), and save files to resources/hg19/
 
+Then, you can run codes in scripts/CNN-AE-LR.ipynb
+
 
 ### "Classifying hub essentiality with sequence and epigenetic features"
 
