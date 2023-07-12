@@ -11,6 +11,8 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
 
 ### Section 2 "Classifying hub essentiality with sequence and epigenetic features"
 
+To run codes in this section, you need to install [juicer](https://github.com/aidenlab/juicer) (v1.6) and [bedtools](https://bedtools.readthedocs.io/en/latest/index.html).
+
 1. you need to download the following data:
    
 	i. `TableS11` from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020)
