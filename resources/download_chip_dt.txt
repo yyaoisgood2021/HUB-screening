@@ -20,4 +20,4 @@ index	experiment	feature	rep	accession	institution	url	peak_type	assembly
 11	ChIP-seq	H3K9me3	1	ENCFF894VEM	broad	https://www.encodeproject.org/files/ENCFF894VEM/@@download/ENCFF894VEM.bed.gz	narrow	19
 11	ChIP-seq	H3K9me3	2	ENCFF001SZN	broad	https://www.encodeproject.org/files/ENCFF001SZN/@@download/ENCFF001SZN.bed.gz	broad	19
 12	ChIP-seq	H4K20me1	1	ENCFF139CKE	Broad	https://www.encodeproject.org/files/ENCFF139CKE/@@download/ENCFF139CKE.bed.gz	narrow	19
-13	n/a	black-list	1	n/a		https://github.com/Boyle-Lab/Blacklist/blob/master/lists/hg19-blacklist.v2.bed.gz	no	19
+13	n/a	black-list	1	n/a		https://github.com/Boyle-Lab/Blacklist/blob/master/lists/Blacklist_v1/hg19-blacklist.bed.gz	no	19
