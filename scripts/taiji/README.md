@@ -12,3 +12,11 @@
 6. Also preprae gene count file and ATAC fragment file for the K562 WT control.
 
 7. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). A sample `taiji_config.yml` file and `taiji_input.tsv` file can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
+
+8. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
+
+9. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
+
+
+
+
