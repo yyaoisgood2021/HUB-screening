@@ -17,7 +17,9 @@
 
 4. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/prep_clusters.R`.  
     ```bash
-    Rscript scripts/taiji/filter_cells.R
+    # cellranger aggr's output folder should be `outs/count/filtered_feature_bc_matrix`
+    Rscript scripts/taiji/filter_cells.R data_sv_folder aggr_out_folder
+    
     
     ```
 
