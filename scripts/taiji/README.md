@@ -16,6 +16,11 @@
     ```
 
 4. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/prep_clusters.R`.  
+    ```bash
+    Rscript scripts/taiji/filter_cells.R
+    
+    ```
+
 
 5. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count).
 
