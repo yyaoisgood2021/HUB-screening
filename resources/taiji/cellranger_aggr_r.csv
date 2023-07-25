@@ -1,0 +1,3 @@
+sample_id,molecule_h5,essentiality
+N2,/stg3/data3/peiyao/HUBS/pair_can/scRNA10x/N2/outs/molecule_info.h5,ess
+N7,/stg3/data3/peiyao/HUBS/pair_can/scRNA10x/N7/outs/molecule_info.h5,noness
