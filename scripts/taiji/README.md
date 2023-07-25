@@ -19,10 +19,11 @@
     ```bash
     Rscript scripts/taiji/filter_cells.R seurat_sv_folder_1 aggr_out_folder
     # seurat_sv_folder_1 is the folder to save this command's output. for this and all output_sv_folders below, make sure you have already created these folders
-    # cellranger aggr's output folder should be outs/count/filtered_feature_bc_matrix
+    # cellranger aggr's output folder should be cellranger_prefix/outs/count/filtered_feature_bc_matrix
     
     Rscript scripts/taiji/mk-indv-rna-clusters.R path/to/filtered_seurat_obj seurat_sv_folder_2 n_pc n_pc_cls 
     # path/to/filtered_seurat_obj: the saved seurat object from the last step, should be seurat_sv_folder_1/hubs.high_quality.combined.s1.rds
+    # seurat_sv_folder_2: save folder for this command
     # n_pc, n_pc_cls: hyperparameters for PCA and single-cell clustering. I'm using 30, 30 in my manuscript
     ```
 
@@ -37,9 +38,12 @@
     # also count the Noness library (named as N7 in my codes). change the sample id and fastqs path accordingly
     ```
 
-5. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by running `scripts/taiji/mk-psbulk-data.0.R` and then `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
+5. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/filter_cells_atac.R`, `scripts/taiji/mk-psbulk-data.0.R` and `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
 
     ```bash
+    Rscript scripts/taiji/filter_cells_atac.R
+    
+    
     Rscript scripts/taiji/mk-psbulk-data.0.R path/to/ess_clustered_rna_seurat_obj path/to/noness_clustered_rna_seurat_obj \
     
 
