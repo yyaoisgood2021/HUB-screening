@@ -90,7 +90,7 @@ format of `coord file`:
 
 ### Section 5 "Pseudobulk analysis using Taiji"
 
-to repeat the analysis, following the [steps](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/Pseudobullk_Taiji/README.md)
+to repeat the analysis, following the [steps](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji/README.md)
 
 
 
