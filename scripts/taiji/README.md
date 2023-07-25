@@ -7,7 +7,7 @@
 
 4. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count).
 
-5. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by running `scripts/taiji/mk_psbulk_data.R`. All hyper-parameters can be found in the scripts.   
+5. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by running `scripts/taiji/mk_psbulk_data.0.R` and then `scripts/taiji/mk_psbulk_data.1.R`. All hyper-parameters can be found in the scripts.   
 
 6. Also preprae gene count file and ATAC fragment file for the K562 WT control.
 
