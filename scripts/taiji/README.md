@@ -47,14 +47,16 @@
     # seurat_atac_sv_folder_1: folder to save the output of this command 
     
     Rscript scripts/taiji/mk-psbulk-data.0.R path/to/ess_clustered_rna_seurat_obj path/to/noness_clustered_rna_seurat_obj \
-    path/to/atac_save_folder 
+    path/to/atac_save_folder n_pc n_pc_cls res \
+    seurat_atac_sv_folder_2
     
 
-    # path/to/ess_clustered_rna_seurat_obj: the path to the RNA-seq seurat object including clustering results for the ess library.
+    # path/to/ess_clustered_rna_seurat_obj: the path to the RNA-seq seurat object including the clustering results for the ess library.
     # It is the output of step 3, and should be seurat_sv_folder_2/ess_rna.with_cluster_info.npcs30_pc30.s2.rds
     # path/to/noness_clustered_rna_seurat_obj: should be seurat_sv_folder_2/noness_rna.with_cluster_info.npcs30_pc30.s2.rds
     # path/to/atac_save_folder: this should be the result_save_folder of the previous step. ie, seurat_atac_sv_folder_1
-    
+    # n_pc, n_pc_cls, res: hyperparameters used in the PCA and single-cell clustering steps, refer to the step 3. I'm using 30, 30, 3 here
+    # seurat_atac_sv_folder_2: folder to save the output of this command  
     ```
 
 6. Also preprae gene count file and ATAC fragment file for the K562 WT control.
