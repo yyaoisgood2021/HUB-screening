@@ -88,6 +88,11 @@ format of `coord file`:
     python scripts/calc_entropy_genome1D.py `overlap file save path` `entropy result save path`
     ```
 
+### Section 5 "Pseudobulk analysis using Taiji"
+
+to repeat the analysis, following the [steps](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/Pseudobullk_Taiji/README.md)
+
+
 
 
 
