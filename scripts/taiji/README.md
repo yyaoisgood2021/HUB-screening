@@ -8,23 +8,29 @@
                      --transcriptome=/stg3/data3/peiyao/software/refdata-gex-GRCh38-2020-A \
                      --fastqs=/stg3/data3/peiyao/HUBS/pair_can/scRNA10x/data_N2 \
                      --sample=22070FL-01-02-01
-    # also count the Noness library. change the sample id, fastqs path and sample prefix accordingly
+    # also count the Noness library (named as N7 in my codes). change the sample id, fastqs path and sample prefix accordingly
 
     cellranger aggr --id=combined \
-                    --csv=/stg3/data3/peiyao/HUBS/pair_can/scRNA10x/cellranger_aggr_r.csv \
+                    --csv=resources/taiji/cellranger_aggr_r.csv \
                     --nosecondary
     ```
 
-4. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/prep_clusters.R`.  
+4. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/mk-indv-rna-clusters.R`.  
     ```bash
+    Rscript scripts/taiji/filter_cells.R seurat_sv_folder_1 aggr_out_folder
     # cellranger aggr's output folder should be `outs/count/filtered_feature_bc_matrix`
-    Rscript scripts/taiji/filter_cells.R data_sv_folder aggr_out_folder
     
-    
+    Rscript scripts/taiji/mk-indv-rna-clusters.R path/to/filtered_seurat_obj seurat_sv_folder_2 n_pc n_pc_cls 
+    # path/to/filtered_seurat_obj is the saved seurat object from the last step, should be seurat_sv_folder_1/hubs.high_quality.combined.s1.rds
+    # n_pc, n_pc_cls: hyperparameters for PCA and single-cell clustering. I'm using 30, 30 in my manuscript
     ```
 
 
 5. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count).
+
+
+
+
 
 6. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by running `scripts/taiji/mk_psbulk_data.0.R` and then `scripts/taiji/mk_psbulk_data.1.R`. All hyper-parameters can be found in the scripts.   
 
