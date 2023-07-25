@@ -41,7 +41,7 @@
 5. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/filter_cells_atac.R`, `scripts/taiji/mk-psbulk-data.0.R` and `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
 
     ```bash
-    Rscript scripts/taiji/filter_cells_atac.R
+    Rscript scripts/taiji/filter_cells_atac.R path/to/cellranger-atac/ess/out path/to/cellranger-atac/noness/out seurat_atac_sv_folder_1
     
     
     Rscript scripts/taiji/mk-psbulk-data.0.R path/to/ess_clustered_rna_seurat_obj path/to/noness_clustered_rna_seurat_obj \
