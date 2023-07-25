@@ -42,14 +42,19 @@
 
     ```bash
     Rscript scripts/taiji/filter_cells_atac.R path/to/cellranger-atac/ess/out path/to/cellranger-atac/noness/out seurat_atac_sv_folder_1
-    
+    # path/to/cellranger-atac/ess/out: outs/ folder of the cellranger-atac count command, for the Ess library. should contain filtered_peak_bc_matrix.h5
+    # path/to/cellranger-atac/noness/out: out/ folder for the Noness library
+    # seurat_atac_sv_folder_1: folder to save the output of this command 
     
     Rscript scripts/taiji/mk-psbulk-data.0.R path/to/ess_clustered_rna_seurat_obj path/to/noness_clustered_rna_seurat_obj \
+    path/to/atac_save_folder 
     
 
     # path/to/ess_clustered_rna_seurat_obj: the path to the RNA-seq seurat object including clustering results for the ess library.
     # It is the output of step 3, and should be seurat_sv_folder_2/ess_rna.with_cluster_info.npcs30_pc30.s2.rds
     # path/to/noness_clustered_rna_seurat_obj: should be seurat_sv_folder_2/noness_rna.with_cluster_info.npcs30_pc30.s2.rds
+    # path/to/atac_save_folder: this should be the result_save_folder of the previous step. ie, seurat_atac_sv_folder_1
+    
     ```
 
 6. Also preprae gene count file and ATAC fragment file for the K562 WT control.
