@@ -15,30 +15,44 @@
                     --nosecondary
     ```
 
-4. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/mk-indv-rna-clusters.R`.  
+3. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/mk-indv-rna-clusters.R`. The statistics files for the clustering results `ess_rna.cls_info.npcs30_pc30.txt` and `noness_rna.cls_info.npcs30_pc30.txt` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).  
     ```bash
     Rscript scripts/taiji/filter_cells.R seurat_sv_folder_1 aggr_out_folder
-    # cellranger aggr's output folder should be `outs/count/filtered_feature_bc_matrix`
+    # seurat_sv_folder_1 is the folder to save this command's output. for this and all output_sv_folders below, make sure you have already created these folders
+    # cellranger aggr's output folder should be outs/count/filtered_feature_bc_matrix
     
     Rscript scripts/taiji/mk-indv-rna-clusters.R path/to/filtered_seurat_obj seurat_sv_folder_2 n_pc n_pc_cls 
-    # path/to/filtered_seurat_obj is the saved seurat object from the last step, should be seurat_sv_folder_1/hubs.high_quality.combined.s1.rds
+    # path/to/filtered_seurat_obj: the saved seurat object from the last step, should be seurat_sv_folder_1/hubs.high_quality.combined.s1.rds
     # n_pc, n_pc_cls: hyperparameters for PCA and single-cell clustering. I'm using 30, 30 in my manuscript
     ```
 
+4. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count) (v7.0.0).
 
-5. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count).
+    ```bash
+    # count the Ess library (named as N2 in my codes)
+    cellranger-atac count --id=N2 \
+                          --reference=/stg3/data3/peiyao/software/refdata-cellranger-arc-GRCh38-2020-A-2.0.0 \
+                          --fastqs=/stg3/data3/peiyao/HUBS/pair_can/ATAC-10x/data_N2
+    
+    # also count the Noness library (named as N7 in my codes). change the sample id and fastqs path accordingly
+    ```
 
+5. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by running `scripts/taiji/mk-psbulk-data.0.R` and then `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
 
+    ```bash
+    Rscript scripts/taiji/mk-psbulk-data.0.R path/to/ess_clustered_rna_seurat_obj path/to/noness_clustered_rna_seurat_obj \
+    
 
+    # path/to/ess_clustered_rna_seurat_obj: the path to the RNA-seq seurat object including clustering results for the ess library.
+    # It is the output of step 3, and should be seurat_sv_folder_2/ess_rna.with_cluster_info.npcs30_pc30.s2.rds
+    # path/to/noness_clustered_rna_seurat_obj: should be seurat_sv_folder_2/noness_rna.with_cluster_info.npcs30_pc30.s2.rds
+    ```
 
+6. Also preprae gene count file and ATAC fragment file for the K562 WT control.
 
-6. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by running `scripts/taiji/mk_psbulk_data.0.R` and then `scripts/taiji/mk_psbulk_data.1.R`. All hyper-parameters can be found in the scripts.   
+7. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). A sample `taiji_config.yml` file and `taiji_input.tsv` file can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
 
-7. Also preprae gene count file and ATAC fragment file for the K562 WT control.
-
-8. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). A sample `taiji_config.yml` file and `taiji_input.tsv` file can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
-
-9. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
+8. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
 
 10. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
 
