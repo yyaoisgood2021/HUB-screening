@@ -5,7 +5,7 @@
    cd results/data/RNA/ess
    prefetch SRR24376123 
    ```
-   then unzip the fastq.gz files, and repeat the codes to download fastq files for the noness library and ATAC-seq experiments
+   then unzip the fastq.gz files, and repeat the codes to download fastq files for the noness library and ATAC-seq experiments. You can also download the processed data and put them in results/proc_data.
 
 2. Process scRNA-seq raw sequencing data and save to `results/proc_data/RNA`. Use `cellranger count` to count fastq files for both Ess and Noness libraries, then use `cellranger aggr` to combine two libraries. If you download the processed files from GEO, you can put them in results/proc_data/RNA and directly run `cellranger aggr`. Run all the steps with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) (v7.0.0). The sample csv file `cellranger_aggr_r.csv` required by the `cellranger aggr` command can be obtained from [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
     ```bash
