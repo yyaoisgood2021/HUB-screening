@@ -156,8 +156,18 @@
     ```
 
 11. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
+    ```bash
+    Rscript scripts/taiji/post_taiji_analysis.0.R \
+    results/taiji_results \
+    results/taiji_results_analysis \
+    results/seurat_ATAC/clustered/stat_df.npcs30_pc30.3.txt \
+    
 
-12. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
+    results/taiji_results: taiji_out_folder
+    results/taiji_results_analysis: save folder base
+    ```
+
+13. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
 
 
 # Expected results
