@@ -76,42 +76,30 @@
     # the rna-seurat path for noness library
     # results/seurat_ATAC/filtered: this should be the result_save_folder of the previous step
     # n_pc, n_pc_cls, res: hyperparameters used in the PCA and single-cell clustering steps, refer to the step 3. I'm using 30, 30, 3 here
-    # seurat_atac_sv_folder_2: folder to save the output of this command
+    # results/seurat_ATAC/clustered2: the folder to save the outputs of this command
     ```
     After this command, you will see two seurat objects for the filtered and anchored atac-seq experiments, you will also see a statistics file called `stat_df.npcs30_pc30.3.txt`, you can check the numbers in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji). Run the following codes to prepare RNA data:
 
     ```bash
     Rscript scripts/taiji/mk-psbulk-data.1.R \
-    path/to/seurat/rna/folder \
-    path/to/seurat/atac/folder \
+    results/seurat_RNA/clustered \
+    results/seurat_ATAC/clustered \
     n_pc n_pc_cls res \
-    taiji_data_sv_folder_base 
+    results/taiji_datasets \
+    results/proc_data/ATAC/ess/outs/fragments.tsv.gz \
+    results/proc_data/ATAC/noness/outs/fragments.tsv.gz 
         
-    # path/to/seurat/rna/folder: the output folder of step 3, it should be seurat_sv_folder_2 and it should contain two processed seurat files for the rna experiment: {ess|noness}_rna.with_cluster_info.npcs30_pc30.s1.rds
-    # path/to/seurat/atac/folder: the output folder of the previous step, it should be seurat_atac_sv_folder_2 and it should contain two seurat files for the atac experiments: atac-after-anchor-transfer.{ess|noness}.npcs30_pc30.3.s2.rds
+    # results/seurat_RNA/clustered: the output folder of step 3, it should contain two processed seurat files for the rna experiment: {ess|noness}_rna.with_cluster_info.npcs30_pc30.s2.rds
+    # results/seurat_ATAC/clustered: the output folder of the previous step, and it should contain two seurat files for the atac experiments: atac-after-anchor-transfer.{ess|noness}.npcs30_pc30.3.s2.rds
     # n_pc, n_pc_cls, res: hyperparameters used in the PCA and single-cell clustering steps, refer to the step 3.
     # refer to the parameters in the previous steps. I'm using 30, 30, 3 here
-    # taiji_data_sv_folder_base: the base folder to save outputs of this command,
-    # when using n_pc=30, n_pc_cls=30, and res=3, output are saved under taiji_data_sv_folder_base/npcs30_pc30.3
+    # results/taiji_datasets: the base folder to save outputs of this command, when using n_pc=30, n_pc_cls=30, and res=3, output are saved under results/taiji_datasets/npcs30_pc30.3
+    # results/proc_data/ATAC/ess/outs/fragments.tsv.gz: the raw fragment file of the ATAC experiment, we will extract fragments from it
     ```
-    Then, prepare ATAC data:
-    ```bash
-    Rscript scripts/taiji/mk-psbulk-data.2.R \
-    path/to/seurat/rna/folder \
-    path/to/seurat/atac/folder \
-    n_pc n_pc_cls res \
-    taiji_data_sv_folder_base 
-        
-    # path/to/seurat/rna/folder: the output folder of step 3, it should be seurat_sv_folder_2 and it should contain two processed seurat files for the rna experiment: {ess|noness}_rna.with_cluster_info.npcs30_pc30.s1.rds
-    # path/to/seurat/atac/folder: the output folder of the previous step, it should be seurat_atac_sv_folder_2 and it should contain two seurat files for the atac experiments: atac-after-anchor-transfer.{ess|noness}.npcs30_pc30.3.s2.rds
-    # n_pc, n_pc_cls, res: hyperparameters used in the PCA and single-cell clustering steps, refer to the step 3.
-    # refer to the parameters in the previous steps. I'm using 30, 30, 3 here
-    # taiji_data_sv_folder_base: the base folder to save outputs of this command,
-    # when using n_pc=30, n_pc_cls=30, and res=3, output are saved under taiji_data_sv_folder_base/npcs30_pc30.3
-    ```
+    
 
 
-8. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
+7. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
    
    * ATAC peaks: [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/), directly download the bed narrow peak file in the GRCh38 assembly
    * RNA counts: ENCSR637VLS
