@@ -22,6 +22,7 @@ library(EnsDb.Hsapiens.v86)
 library(ggplot2)
 library(stringr)
 
+
 # this file loads the separate ess and noness rna object (with cls information)
 # also loads separate ess and noness filtered and anchor transfered and cls predicted atac objects
 # this script performs anchor transfer to predict atac cell cls
@@ -186,8 +187,25 @@ extract_psbulk_data_for_cls_i <- function(i, rna_ds, atac_ds, atac_mat, cls_info
   while (nrow(atac_mat_i) > 0) {
     atac_mat_i <- atac_mat_i %>% dplyr::mutate(s = s - 1) %>% dplyr::filter(s >= 1)
     write.table(atac_mat_i$str_to_write, sv_file_path_count, quote=F, col.names=F, row.names=F, append=T)
-    }
   }
+  
+  # compress to gz
+  input_file <- sv_file_path_count
+  output_file <- paste0(sv_file_path_count, '.gz')
+  # Read the text file
+  data_to_compress <- readLines(input_file)
+
+  # Open a connection to the gzipped file for writing
+  gz_connection <- gzfile(output_file, "wb")
+
+  # Write the data to the gzipped file
+  writeLines(data_to_compress, con = gz_connection)
+
+  # Close the connection
+  close(gz_connection)
+
+  }
+
 
   return(this_cls_info_newline)
   }
