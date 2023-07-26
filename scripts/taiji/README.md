@@ -78,7 +78,9 @@
     # n_pc, n_pc_cls, res: hyperparameters used in the PCA and single-cell clustering steps, refer to the step 3. I'm using 30, 30, 3 here
     # results/seurat_ATAC/clustered2: the folder to save the outputs of this command
     ```
-    After this command, you will see two seurat objects for the filtered and anchored atac-seq experiments, you will also see a statistics file called `stat_df.npcs30_pc30.3.txt`, you can check the numbers in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji). Run the following codes to prepare data:
+    After this command, you will see two seurat objects for the filtered and anchored atac-seq experiments, you will also see a statistics file called `stat_df.npcs30_pc30.3.txt`, you can check the numbers in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
+
+   Run the following codes to prepare data:
 
     ```bash
     Rscript scripts/taiji/mk-psbulk-data.1.R \
@@ -96,7 +98,9 @@
     # results/taiji_datasets: the base folder to save outputs of this command, when using n_pc=30, n_pc_cls=30, and res=3, output are saved under results/taiji_datasets/npcs30_pc30.3
     # results/proc_data/ATAC/ess/outs/fragments.tsv.gz: the raw fragment file of the ATAC experiment, we will extract fragments from it
     ```
-7. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
+    After this command, you will see the gene count tsv file and atac fragment bed.gz file for each pseudobulk cluster. A statistics file named `cls-info-remained.txt` is also generated. You can check the numbers in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji)
+   
+8. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
    
    * ATAC peaks: [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/), directly download the bed narrow peak file in the GRCh38 assembly and save to `results/proc_data/ATAC/WT/ENCFF976CEI.bed`
    * RNA counts:
@@ -123,23 +127,33 @@
      
      iv. sum up all the results and save it as `results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt`. There's no need to normalize.
 
-8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` and `input.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/). You must change the paths in the `config.yml` accordingly. If you used customized save path in the codes above, you must run the following command to generate `input.yml`. More explanations can be found in the [scripts](). 
+9. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` and `input.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/). You must change the paths in the `config.yml` manually, then you can save the file with correct paths to `results/taiji_commands/config.yml`. Run the following command to generate `results/taiji_commands/input.yml`. More explanations can be found in the [scripts](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji/prep_input_config.py).
    ```bash
    python scripts/taiji/prep_input_config.py \
    results/taiji_datasets/npcs30_pc30.3/cls-info-remained.txt \
    results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt \
    results/proc_data/ATAC/WT/ENCFF976CEI.bed \
-   sample_rna_atac_folder_path
+   results/taiji_datasets/npcs30_pc30.3 \
+   /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt \
+   results/taiji_commands/input.yml
    
-
-   
-   # wt_rna_path: the path to the WT.rna-expr-pscounts.txt file as you prepared in the step 7.iv
-   # wt_atac_path: the path to the downloaded ATAC-seq peak file, as you prepared in the step 7. ex: "/stg3/data3/peiyao/HUBS/pair_can/taiji_run/K562-WT-datasets/combined_narrow_pks.bed"
-   # sample_rna_atac_folder_path: the path to the folder that you saved the extracted rna and atac data for the sample Ess and Noness libraries. It should be taiji_data_sv_folder_base/npcs30_pc30.3. remove the "/" in the end of the string
+   # results/taiji_datasets/npcs30_pc30.3h: the path to the folder that you saved the extracted rna and atac data for the sample Ess and Noness libraries. remove the "/" in the end of the string
+   # /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt: this is the path to the Epitensor results, we use it to impute Hi-C contacts, you can copy this file to your local folder and modify this line
+   # path to save the results
    ```
-    
+   
+10. Run Taiji following the [instruction](https://taiji-pipeline.github.io/).
+    ```bash
+    ml load taiji
+    progress_folder=results/taiji_progresses # this folder save the progresses so you can resume job
+    mkdir -p ${progress_folder}
+   
+    cd ${progress_folder} # enter progress_folder and submit job
+    config_path=results/taiji_commands/config.yml
+    taiji run --config ${config_path} --cloud
 
-10. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). 
+    # I'd recommend put taiji outputs to "results/taiji_results", you can modify this in the config.yml
+    ```
 
 11. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
 
