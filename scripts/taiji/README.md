@@ -38,34 +38,61 @@
     # also count the Noness library (named as N7 in my codes). change the sample id and fastqs path accordingly
     ```
 
-5. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to filter out the low-quality single cells in the scATAC experiments, then integrate scATAC onto the scRNA experiments, and finally extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/filter_cells_atac.R`, `scripts/taiji/mk-psbulk-data.0.R` and `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
+5. Filter out the low-quality single cells in the scATAC experiments by running `scripts/taiji/filter_cells_atac.R`
+
+   ```bash
+   Rscript scripts/taiji/filter_cells_atac.R \
+   path/to/cellranger-atac/ess/out \
+   path/to/cellranger-atac/noness/out \
+   seurat_atac_sv_folder_1
+   # path/to/cellranger-atac/ess/out: outs/ folder of the cellranger-atac count command, for the Ess library. should contain filtered_peak_bc_matrix.h5
+   # path/to/cellranger-atac/noness/out: out/ folder for the Noness library
+   # seurat_atac_sv_folder_1: folder to save the output of this command 
+   ```
+
+6. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to integrate scATAC onto the scRNA experiments, and then extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/mk-psbulk-data.0.R` and then `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
 
     ```bash
-    Rscript scripts/taiji/filter_cells_atac.R path/to/cellranger-atac/ess/out path/to/cellranger-atac/noness/out seurat_atac_sv_folder_1
-    # path/to/cellranger-atac/ess/out: outs/ folder of the cellranger-atac count command, for the Ess library. should contain filtered_peak_bc_matrix.h5
-    # path/to/cellranger-atac/noness/out: out/ folder for the Noness library
-    # seurat_atac_sv_folder_1: folder to save the output of this command 
-    
-    Rscript scripts/taiji/mk-psbulk-data.0.R path/to/ess_clustered_rna_seurat_obj path/to/noness_clustered_rna_seurat_obj \
+    Rscript scripts/taiji/mk-psbulk-data.0.R \
+    path/to/ess_clustered_rna_seurat_obj path/to/noness_clustered_rna_seurat_obj \
     path/to/atac_save_folder n_pc n_pc_cls res \
     seurat_atac_sv_folder_2
-    
-
     # path/to/ess_clustered_rna_seurat_obj: the path to the RNA-seq seurat object including the clustering results for the ess library.
     # It is the output of step 3, and should be seurat_sv_folder_2/ess_rna.with_cluster_info.npcs30_pc30.s2.rds
     # path/to/noness_clustered_rna_seurat_obj: should be seurat_sv_folder_2/noness_rna.with_cluster_info.npcs30_pc30.s2.rds
     # path/to/atac_save_folder: this should be the result_save_folder of the previous step. ie, seurat_atac_sv_folder_1
     # n_pc, n_pc_cls, res: hyperparameters used in the PCA and single-cell clustering steps, refer to the step 3. I'm using 30, 30, 3 here
-    # seurat_atac_sv_folder_2: folder to save the output of this command  
+    # seurat_atac_sv_folder_2: folder to save the output of this command
+    ```
+    After this command, you will see two seurat objects for the filtered and anchored atac-seq experiments, you will also see a statistics file called `stat_df.npcs30_pc30.3.txt`, you can check the numbers in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
+
+    ```bash
+    Rscript scripts/taiji/mk-psbulk-data.1.R \
+    path/to/seurat/rna/folder \
+    path/to/seurat/atac/folder \
+    n_pc n_pc_cls res \
+    taiji_data_sv_folder_base 
+        
+    # path/to/seurat/rna/folder: the output folder of step 3, it should be seurat_sv_folder_2 and it should contain two processed seurat files for the rna experiment: {ess|noness}_rna.with_cluster_info.npcs30_pc30.s1.rds
+    # path/to/seurat/atac/folder: the output folder of the previous step, it should be seurat_atac_sv_folder_2 and it should contain two seurat files for the atac experiments: atac-after-anchor-transfer.{ess|noness}.npcs30_pc30.3.s2.rds
+    # n_pc, n_pc_cls, res: hyperparameters used in the PCA and single-cell clustering steps, refer to the step 3.
+    # refer to the parameters in the previous steps. I'm using 30, 30, 3 here
+    # taiji_data_sv_folder_base: the base folder to save outputs of this command,
+    # when using n_pc=30, n_pc_cls=30, and res=3, output are saved under taiji_data_sv_folder_base/npcs30_pc30.3
     ```
 
-6. Also preprae gene count file and ATAC fragment file for the K562 WT control.
 
-7. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). A sample `taiji_config.yml` file and `taiji_input.tsv` file can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
 
-8. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
 
-10. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
+7. (optional) Also preprae gene count file and ATAC fragment file for the K562 WT control.
+
+8. Generate the `config.yml` and `input.yml` files
+
+9. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). A sample `taiji_config.yml` file and `taiji_input.yml` file can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
+
+10. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
+
+11. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
 
 
 # Expected results
