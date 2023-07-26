@@ -78,7 +78,7 @@
     # n_pc, n_pc_cls, res: hyperparameters used in the PCA and single-cell clustering steps, refer to the step 3. I'm using 30, 30, 3 here
     # results/seurat_ATAC/clustered2: the folder to save the outputs of this command
     ```
-    After this command, you will see two seurat objects for the filtered and anchored atac-seq experiments, you will also see a statistics file called `stat_df.npcs30_pc30.3.txt`, you can check the numbers in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji). Run the following codes to prepare RNA data:
+    After this command, you will see two seurat objects for the filtered and anchored atac-seq experiments, you will also see a statistics file called `stat_df.npcs30_pc30.3.txt`, you can check the numbers in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji). Run the following codes to prepare data:
 
     ```bash
     Rscript scripts/taiji/mk-psbulk-data.1.R \
@@ -96,41 +96,43 @@
     # results/taiji_datasets: the base folder to save outputs of this command, when using n_pc=30, n_pc_cls=30, and res=3, output are saved under results/taiji_datasets/npcs30_pc30.3
     # results/proc_data/ATAC/ess/outs/fragments.tsv.gz: the raw fragment file of the ATAC experiment, we will extract fragments from it
     ```
-    
-
-
 7. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
    
-   * ATAC peaks: [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/), directly download the bed narrow peak file in the GRCh38 assembly
-   * RNA counts: ENCSR637VLS
-     i. download raw fastq data [ENCSR637VLS](https://www.encodeproject.org/experiments/ENCSR637VLS/) (single-end), and [ENCSR000CPH](https://www.encodeproject.org/experiments/ENCSR000CPH/), [ENCSR000AEM](https://www.encodeproject.org/experiments/ENCSR000AEM/), and [ENCSR000AEO](https://www.encodeproject.org/experiments/ENCSR000AEO/)
+   * ATAC peaks: [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/), directly download the bed narrow peak file in the GRCh38 assembly and save to `results/proc_data/ATAC/WT/ENCFF976CEI.bed`
+   * RNA counts:
+     
+     i. download raw fastq data [ENCSR637VLS](https://www.encodeproject.org/experiments/ENCSR637VLS/) (single-end, all other files are paired-end), and [ENCSR000CPH](https://www.encodeproject.org/experiments/ENCSR000CPH/), [ENCSR000AEM](https://www.encodeproject.org/experiments/ENCSR000AEM/), and [ENCSR000AEO](https://www.encodeproject.org/experiments/ENCSR000AEO/)
 
      ii. align with [STAR](https://github.com/alexdobin/STAR) (2.7.10a) according to the manual. Use the GRCh38 assembly.
-     An example script for running STAR aligner is shown below.
+     An example script for running STAR aligner on ENCSR000AEM is shown below. repeat the codes below for other replicates and experiments.
      ```bash
+     out_dir=results/proc_data/WT/ENCSR000AEM
      STAR --genomeDir /stg3/data3/peiyao/HUBS/pair_can/WT_bulk/hg38_index \
      --runThreadN 6 \
      --runMode alignReads \
-     --readFilesIn exp_1.rep_1.r1.fastq exp_1.rep_1.r2.fastq \
-     --outFileNamePrefix exp_1.rep_1-q30- \
+     --readFilesIn results/data/RNA/WT/ENCSR000AEM/ENCFF001RED.fastq results/data/RNA/WT/ENCSR000AEM/ENCFF001RDZ.fastq \
+     --outFileNamePrefix ${out_dir}/rep1-q30- \
      --outSAMtype BAM SortedByCoordinate \
      --outSAMattributes Standard \
      --outFilterMultimapNmax 1 \
      --outSAMmapqUnique 30 \
      --quantMode GeneCounts
      ```
-     iii. convert gene_id to gene_short_name in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41)
      
-     iv. sum up all the results and save it as `WT.rna-expr-pscounts.txt`
+     iii. STAR will generate a lot of files and you can see `{prefix}-ReadsPerGene.out.tab`, convert gene_id to gene_short_name (gene symbol) in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41)
+     
+     iv. sum up all the results and save it as `results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt`. There's no need to normalize.
 
-8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/config.yml), change the paths accordingly. Run the following command to generate `input.yml`. More explanations can be found in the [scripts]()
+8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` and `input.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/). You must change the paths in the `config.yml` accordingly. If you used customized save path in the codes above, you must run the following command to generate `input.yml`. More explanations can be found in the [scripts](). 
    ```bash
-   python scripts/taiji/prep_input_config.py cls_info_path \
-   wt_rna_path wt_atac_path \
+   python scripts/taiji/prep_input_config.py \
+   results/taiji_datasets/npcs30_pc30.3/cls-info-remained.txt \
+   results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt \
+   results/proc_data/ATAC/WT/ENCFF976CEI.bed \
    sample_rna_atac_folder_path
    
 
-   # cls_info_path: a txt file generated by scripts/taiji/mk-psbulk-data.1.R. You should see it in the following path: taiji_data_sv_folder_base/npcs30_pc30.3/cls-info-remained.txt
+   
    # wt_rna_path: the path to the WT.rna-expr-pscounts.txt file as you prepared in the step 7.iv
    # wt_atac_path: the path to the downloaded ATAC-seq peak file, as you prepared in the step 7. ex: "/stg3/data3/peiyao/HUBS/pair_can/taiji_run/K562-WT-datasets/combined_narrow_pks.bed"
    # sample_rna_atac_folder_path: the path to the folder that you saved the extracted rna and atac data for the sample Ess and Noness libraries. It should be taiji_data_sv_folder_base/npcs30_pc30.3. remove the "/" in the end of the string
