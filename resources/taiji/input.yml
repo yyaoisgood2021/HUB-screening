@@ -1,0 +1,710 @@
+RNA-seq:
+  - id: WT_RNA
+    group: WT
+    replicates:
+      - rep: 1
+        files:
+          - path: results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_13_sub_orig_RNA
+    group: ess_13_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-13.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_20_sub_orig_RNA
+    group: ess_20_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-20.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_2_sub_orig_RNA
+    group: ess_2_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-2.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_0_sub_orig_RNA
+    group: ess_0_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-0.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_1_sub_orig_RNA
+    group: ess_1_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-1.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_24_sub_orig_RNA
+    group: ess_24_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-24.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_3_sub_orig_RNA
+    group: ess_3_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-3.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_4_sub_orig_RNA
+    group: ess_4_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-4.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_17_sub_orig_RNA
+    group: ess_17_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-17.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_14_sub_orig_RNA
+    group: ess_14_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-14.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_6_sub_orig_RNA
+    group: ess_6_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-6.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_5_sub_orig_RNA
+    group: ess_5_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-5.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_8_sub_orig_RNA
+    group: ess_8_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-8.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_11_sub_orig_RNA
+    group: ess_11_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-11.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: ess_15_sub_orig_RNA
+    group: ess_15_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-15.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_3_RNA
+    group: noness_3
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-3.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_0_RNA
+    group: noness_0
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-0.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_2_RNA
+    group: noness_2
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-2.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_13_RNA
+    group: noness_13
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-13.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_8_RNA
+    group: noness_8
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-8.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_4_RNA
+    group: noness_4
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-4.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_11_RNA
+    group: noness_11
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-11.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_7_RNA
+    group: noness_7
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-7.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_17_RNA
+    group: noness_17
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-17.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_1_RNA
+    group: noness_1
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-1.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_5_RNA
+    group: noness_5
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-5.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_14_RNA
+    group: noness_14
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-14.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_10_RNA
+    group: noness_10
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-10.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_6_RNA
+    group: noness_6
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-6.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_21_RNA
+    group: noness_21
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-21.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_9_RNA
+    group: noness_9
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-9.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_12_RNA
+    group: noness_12
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-12.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+  - id: noness_18_RNA
+    group: noness_18
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-18.rna-expr-pscounts.txt
+            tags: ['GeneQuant']
+ATAC-seq:
+  - id: ess_13_sub_orig_ATAC
+    group: ess_13_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-13.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_20_sub_orig_ATAC
+    group: ess_20_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-20.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_2_sub_orig_ATAC
+    group: ess_2_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-2.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_0_sub_orig_ATAC
+    group: ess_0_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-0.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_1_sub_orig_ATAC
+    group: ess_1_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-1.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_24_sub_orig_ATAC
+    group: ess_24_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-24.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_3_sub_orig_ATAC
+    group: ess_3_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-3.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_4_sub_orig_ATAC
+    group: ess_4_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-4.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_17_sub_orig_ATAC
+    group: ess_17_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-17.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_14_sub_orig_ATAC
+    group: ess_14_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-14.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_6_sub_orig_ATAC
+    group: ess_6_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-6.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_5_sub_orig_ATAC
+    group: ess_5_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-5.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_8_sub_orig_ATAC
+    group: ess_8_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-8.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_11_sub_orig_ATAC
+    group: ess_11_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-11.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: ess_15_sub_orig_ATAC
+    group: ess_15_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/ess-15.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_3_ATAC
+    group: noness_3
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-3.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_0_ATAC
+    group: noness_0
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-0.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_2_ATAC
+    group: noness_2
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-2.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_13_ATAC
+    group: noness_13
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-13.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_8_ATAC
+    group: noness_8
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-8.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_4_ATAC
+    group: noness_4
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-4.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_11_ATAC
+    group: noness_11
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-11.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_7_ATAC
+    group: noness_7
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-7.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_17_ATAC
+    group: noness_17
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-17.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_1_ATAC
+    group: noness_1
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-1.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_5_ATAC
+    group: noness_5
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-5.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_14_ATAC
+    group: noness_14
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-14.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_10_ATAC
+    group: noness_10
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-10.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_6_ATAC
+    group: noness_6
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-6.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_21_ATAC
+    group: noness_21
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-21.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_9_ATAC
+    group: noness_9
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-9.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_12_ATAC
+    group: noness_12
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-12.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+  - id: noness_18_ATAC
+    group: noness_18
+    replicates:
+      - rep: 1
+        files:
+          - path: results/taiji_datasets/npcs30_pc30.3/noness-18.atac-fragments.bed.gz
+            tags: ['PairedEnd']
+HiC:
+  - id: WT_HiC
+    group: WT
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_13_sub_orig_HiC
+    group: ess_13_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_20_sub_orig_HiC
+    group: ess_20_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_2_sub_orig_HiC
+    group: ess_2_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_0_sub_orig_HiC
+    group: ess_0_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_1_sub_orig_HiC
+    group: ess_1_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_24_sub_orig_HiC
+    group: ess_24_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_3_sub_orig_HiC
+    group: ess_3_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_4_sub_orig_HiC
+    group: ess_4_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_17_sub_orig_HiC
+    group: ess_17_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_14_sub_orig_HiC
+    group: ess_14_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_6_sub_orig_HiC
+    group: ess_6_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_5_sub_orig_HiC
+    group: ess_5_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_8_sub_orig_HiC
+    group: ess_8_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_11_sub_orig_HiC
+    group: ess_11_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: ess_15_sub_orig_HiC
+    group: ess_15_sub_orig
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_3_HiC
+    group: noness_3
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_0_HiC
+    group: noness_0
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_2_HiC
+    group: noness_2
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_13_HiC
+    group: noness_13
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_8_HiC
+    group: noness_8
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_4_HiC
+    group: noness_4
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_11_HiC
+    group: noness_11
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_7_HiC
+    group: noness_7
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_17_HiC
+    group: noness_17
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_1_HiC
+    group: noness_1
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_5_HiC
+    group: noness_5
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_14_HiC
+    group: noness_14
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_10_HiC
+    group: noness_10
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_6_HiC
+    group: noness_6
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_21_HiC
+    group: noness_21
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_9_HiC
+    group: noness_9
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_12_HiC
+    group: noness_12
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
+  - id: noness_18_HiC
+    group: noness_18
+    replicates:
+      - rep: 1
+        files:
+          - path: /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt
+            tags: ['ChromosomeLoop']
