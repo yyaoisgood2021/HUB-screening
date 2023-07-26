@@ -37,6 +37,9 @@ res <- args[5]
 
 sv_folder_base <- args[6]
 
+mat_ess_path <- args[7]
+mat_noness_path <- args[8]
+
 param_info <- paste0(
   'npcs',npcs,
   '_pc',pc_for_cls,
@@ -54,7 +57,6 @@ data_save_folder <- file.path(
   sv_folder_base,
   param_info)
 
-
 ##################################################################################################
 # make folder to save data (rna bulk + atac peak.bed)
 if (! file.exists(data_save_folder)){
@@ -68,7 +70,7 @@ if (! file.exists(data_save_folder)){
 ess_atac_ds <- readRDS(file.path(
   atac_rds_save_path,
   paste0(
-    'atac-after-anchor-transfer.N2.',
+    'atac-after-anchor-transfer.ess.',
     param_info,
     '.s2.rds'
     )))
@@ -76,7 +78,7 @@ ess_atac_ds <- readRDS(file.path(
 noness_atac_ds <- readRDS(file.path(
   atac_rds_save_path,
   paste0(
-    'atac-after-anchor-transfer.N7.',
+    'atac-after-anchor-transfer.noness.',
     param_info,
     '.s2.rds'
   )))
@@ -84,17 +86,21 @@ noness_atac_ds <- readRDS(file.path(
 DefaultAssay(ess_atac_ds) <- "peaks"
 DefaultAssay(noness_atac_ds) <- "peaks"
 
+mat_ess <- read.table(gzfile(mat_ess_path)) 
+mat_noness <- read.table(gzfile(mat_noness_path))  
+
+
 ##################################################################################################
 # load rna object (separately)
 # '{noness or ess}_rna.with_cluster_info.{npcs10_pc10}.s1.rds'
 ess_rna_RDS_path <- paste0('ess_rna.with_cluster_info.npcs',npcs,
-                       '_pc',pc_for_cls,'.s1.rds')
+                       '_pc',pc_for_cls,'.s2.rds')
 sce_ess <- readRDS(file.path(
   rna_rds_save_path,
   ess_rna_RDS_path))
 
 noness_rna_RDS_path <- paste0('noness_rna.with_cluster_info.npcs',npcs,
-                           '_pc',pc_for_cls,'.s1.rds')
+                           '_pc',pc_for_cls,'.s2.rds')
 sce_noness <- readRDS(file.path(
   rna_rds_save_path,
   noness_rna_RDS_path))
@@ -120,7 +126,7 @@ colnames(cls_info_remained) <- c('cluster_id',
 
 ##################################################################################################
 # function for merging psbulk rna and atac data
-extract_psbulk_data_for_cls_i <- function(i, rna_ds, atac_ds, cls_info_df_this_type, ds_type,
+extract_psbulk_data_for_cls_i <- function(i, rna_ds, atac_ds, atac_mat, cls_info_df_this_type, ds_type,
                                           smallest_rna_community,smallest_atac_community,
                                           ess_enrich_high,ess_enrich_lower,
                                           min_cell_for_atac_peaks,
@@ -157,33 +163,32 @@ extract_psbulk_data_for_cls_i <- function(i, rna_ds, atac_ds, cls_info_df_this_t
                 quote=F, sep='\t', col.names=F)
   }
 
-  # extract this cls ATAC ds, and take the subset of the peaks
+  # extract this cls ATAC ds, and take the subset of the fragments
   print('    proecssing ATAC data ...')
-  cell_ids_atac <- rownames(atac_ds@meta.data[atac_ds@meta.data$predicted.id==i,])
-  atac_this_cls <- atac_ds[,cell_ids_atac]
-  # save ATAC ps-peak to bed
-  atac_peaks_dt <- atac_this_cls@assays$peaks@counts %>% as.matrix
-  atac_peaks_dt[atac_peaks_dt!=0] <- 1 
-  # after this step, convert read counts to existence of cells (1 means there is a peak)
 
-  atac_peaks_dt <- rowSums(atac_peaks_dt) # how many cells have this peak (fragment)
-  atac_peaks_dt <- atac_peaks_dt[atac_peaks_dt>=min_cell_for_atac_peaks] %>% as.data.frame %>% rownames
-  
-  peak_df_to_write <- data.frame(matrix(ncol = 3, nrow = length(atac_peaks_dt)))
-  for (j in (1:length(atac_peaks_dt))) {
-    peak_df_to_write[j,] <- str_split(atac_peaks_dt[j], pattern='-')[[1]]
-  }
-  peak_df_to_write <- peak_df_to_write[peak_df_to_write$X1 %in% c(paste0('chr', 1:22),'chrX','chrY'),]
-  
-  # save to bed file
+  cell_barcodes <- atac_ds@meta.data %>% dplyr::filter(predicted.id==i) %>% row.names
+
+
+
+
+  atac_mat_i <- atac_mat %>% data.frame %>% dplyr::filter(V4 %in% cell_barcodes)
+  result_count <- c()
+  atac_mat_i <- atac_mat_i %>% mutate(str_to_write = paste(V1,V2,V3,sep='\t')) %>% 
+    dplyr::select(V5, str_to_write)
+  atac_mat_i <- atac_mat_i %>% group_by(str_to_write) %>% summarize(s = sum(V5))
+  atac_mat_i <- atac_mat_i %>% ungroup %>% as.data.frame
+
+  # write sv_file_path_count
   if (if_save_data) {
-    sv_bed_file_path <- paste0(ds_type,'-',i,'.atac-peaks.bed')
-    sv_bed_file_path <- file.path(data_save_folder, sv_bed_file_path)
-    write.table(peak_df_to_write, 
-                sv_bed_file_path,
-                quote=F, sep='\t', col.names=F, row.names=F)
+  sv_file_path <- paste0(this_cls,'.atac-fragments.bed')
+  sv_file_path_count <- file.path(data_save_folder, sv_file_path)
+  write.table(atac_mat_i$str_to_write, sv_file_path_count, quote=F, col.names=F, row.names=F)
+  while (nrow(atac_mat_i) > 0) {
+    atac_mat_i <- atac_mat_i %>% dplyr::mutate(s = s - 1) %>% dplyr::filter(s >= 1)
+    write.table(atac_mat_i$str_to_write, sv_file_path_count, quote=F, col.names=F, row.names=F, append=T)
+    }
   }
-  
+
   return(this_cls_info_newline)
   }
 
@@ -197,6 +202,7 @@ for (i in cls_info_df_this_type$cls) {
     i=i, 
     rna_ds=sce_ess, 
     atac_ds=ess_atac_ds, 
+    atac_mat=mat_ess,
     cls_info_df_this_type=cls_info_df_this_type,
     ds_type='ess',
     smallest_rna_community=smallest_rna_community, 
@@ -217,6 +223,7 @@ for (i in cls_info_df_this_type$cls) {
     i=i, 
     rna_ds=sce_noness, 
     atac_ds=noness_atac_ds, 
+    atac_mat=mat_noness,
     cls_info_df_this_type=cls_info_df_this_type,
     ds_type='noness',
     smallest_rna_community=smallest_rna_community, 
@@ -230,7 +237,6 @@ for (i in cls_info_df_this_type$cls) {
 }
 
 print('done creating all the datasets')
-
 
 
 # save cls_info_remained

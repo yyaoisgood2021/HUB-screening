@@ -100,7 +100,7 @@ sce_cur <- RunUMAP(sce_cur, reduction = "pca", dims = 1:Npcs_cls)
 sce_cur <- FindNeighbors(sce_cur, reduction = "pca", dims = 1:Npcs_cls)
 sce_cur <- FindClusters(sce_cur, resolution = c(1,2,2.5,3,1.5,0.75,0.5))
 
-sv_file_name <- paste0('noness_rna.with_cluster_info.npcs',Npcs,'_pc',Npcs_cls,'.s1.rds')
+sv_file_name <- paste0('noness_rna.with_cluster_info.npcs',Npcs,'_pc',Npcs_cls,'.s2.rds')
 saveRDS(sce_cur, file.path(seurat_sv_folder_2,sv_file_name))
 
 sk_file_name <- paste0('noness_rna.cls_info.npcs',Npcs,'_pc',Npcs_cls,'.txt')
