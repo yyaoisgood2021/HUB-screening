@@ -45,6 +45,7 @@
    path/to/cellranger-atac/ess/out \
    path/to/cellranger-atac/noness/out \
    seurat_atac_sv_folder_1
+   
    # path/to/cellranger-atac/ess/out: outs/ folder of the cellranger-atac count command, for the Ess library. should contain filtered_peak_bc_matrix.h5
    # path/to/cellranger-atac/noness/out: out/ folder for the Noness library
    # seurat_atac_sv_folder_1: folder to save the output of this command 
@@ -57,6 +58,7 @@
     path/to/ess_clustered_rna_seurat_obj path/to/noness_clustered_rna_seurat_obj \
     path/to/atac_save_folder n_pc n_pc_cls res \
     seurat_atac_sv_folder_2
+    
     # path/to/ess_clustered_rna_seurat_obj: the path to the RNA-seq seurat object including the clustering results for the ess library.
     # It is the output of step 3, and should be seurat_sv_folder_2/ess_rna.with_cluster_info.npcs30_pc30.s2.rds
     # path/to/noness_clustered_rna_seurat_obj: should be seurat_sv_folder_2/noness_rna.with_cluster_info.npcs30_pc30.s2.rds
@@ -81,14 +83,33 @@
     # when using n_pc=30, n_pc_cls=30, and res=3, output are saved under taiji_data_sv_folder_base/npcs30_pc30.3
     ```
 
+7. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
+   
+   * ATAC peaks: [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/), directly download the bed narrow peak file in the GRCh38 assembly
+   * RNA counts: ENCSR637VLS
+     i. download raw fastq data [ENCSR637VLS](https://www.encodeproject.org/experiments/ENCSR637VLS/) (single-end), and [ENCSR000CPH](https://www.encodeproject.org/experiments/ENCSR000CPH/), [ENCSR000AEM](https://www.encodeproject.org/experiments/ENCSR000AEM/), and [ENCSR000AEO](https://www.encodeproject.org/experiments/ENCSR000AEO/)
 
+     ii. align with [STAR](https://github.com/alexdobin/STAR) (2.7.10a) according to the manual. Use the GRCh38 assembly.
+     An example script for running STAR aligner is shown below.
+     ```bash
+     STAR --genomeDir /stg3/data3/peiyao/HUBS/pair_can/WT_bulk/hg38_index \
+     --runThreadN 6 \
+     --runMode alignReads \
+     --readFilesIn exp_1.rep_1.r1.fastq exp_1.rep_1.r2.fastq \
+     --outFileNamePrefix exp_1.rep_1-q30- \
+     --outSAMtype BAM SortedByCoordinate \
+     --outSAMattributes Standard \
+     --outFilterMultimapNmax 1 \
+     --outSAMmapqUnique 30 \
+     --quantMode GeneCounts
+     ```
+     iii. convert gene_id to gene_short_name in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41)
+     
+     iv. sum up all the results and save it as `WT.rna-expr-pscounts.txt`
 
+8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you used to save the above gene count and ATAC fragment files. More explanations can be found in  
 
-7. (optional) Also preprae gene count file and ATAC fragment file for the K562 WT control.
-
-8. Generate the `config.yml` and `input.yml` files
-
-9. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). A sample `taiji_config.yml` file and `taiji_input.yml` file can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
+9. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). 
 
 10. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
 
