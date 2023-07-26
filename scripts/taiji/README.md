@@ -163,8 +163,8 @@
     results/seurat_ATAC/clustered/stat_df.npcs30_pc30.3.txt \
     
 
-    results/taiji_results: taiji_out_folder
-    results/taiji_results_analysis: save folder base
+    # results/taiji_results: taiji_out_folder
+    # results/taiji_results_analysis: save folder base
     ```
 
 13. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
