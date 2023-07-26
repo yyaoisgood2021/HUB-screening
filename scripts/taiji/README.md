@@ -107,13 +107,14 @@
      
      iv. sum up all the results and save it as `WT.rna-expr-pscounts.txt`
 
-8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you used to save the above gene count and ATAC fragment files. More explanations can be found in  
+8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/config.yml), change the paths accordingly. Run the following command to generate `input.yml`. More explanations can be found in the [scripts]()
+    
 
-9. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). 
+10. Run Taiji following the [instruction](https://taiji-pipeline.github.io/). 
 
-10. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
+11. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
 
-11. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
+12. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
 
 
 # Expected results
