@@ -1,0 +1,14 @@
+input: "/stg3/data3/peiyao/HUBS/pair_can/taiji_run/20221212.epi-taiji/datasets.30-30-3/taiji_inputs/all.counts.down/input.yml"
+output_dir: "/stg3/data3/peiyao/HUBS/pair_can/taiji_run/20221212.epi-taiji/results.30-30-3/all.counts.down/"
+assembly: "GRCh38"
+genome: "/stg3/data3/peiyao/data/genome/hg38/all.hg38.fa"
+annotation: "/stg3/data3/peiyao/data/gencode/hg38/gencode.v41.annotation.gtf"
+genome_index: "/stg3/data3/peiyao/HUBS/pair_can/taiji_run/indexes/GRCh38.index"
+bwa_index: "/stg3/data3/peiyao/HUBS/pair_can/taiji_run/indexes/BWAIndex/BWAIndex"
+star_index: "/stg3/data3/peiyao/HUBS/pair_can/taiji_run/indexes/STAR_index"
+rsem_index: "/stg3/data3/peiyao/HUBS/pair_can/taiji_run/indexes/rsem_index/rsem_index"
+resource:
+  ATAC_Find_TFBS_Union:
+    memory: 32
+  Create_Linkage:
+    memory: 120
