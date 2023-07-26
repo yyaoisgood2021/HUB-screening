@@ -83,7 +83,7 @@ VlnPlot(SeuObj_remain, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"),
 	group.by = 'orig.ident', ncol = 3)
 dev.off()
 
-saveRDS(SeuObj_remain, file.path(vlnplot.low-qual-removed.pdf, 'hubs.high_quality.combined.s1.rds'))
+saveRDS(SeuObj_remain, file.path(data_sv_folder, 'hubs.high_quality.combined.s1.rds'))
 
 
 
