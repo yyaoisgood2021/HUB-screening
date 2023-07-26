@@ -230,12 +230,8 @@ for (i in cls_info_df_this_type$cls) {
 }
 
 print('done creating all the datasets')
-print('writing input.tsv')
-# create input.tsv file based on the cls_info_remained
-write_input_tsv(data_save_folder, cls_info_remained)
 
-# create config.yml file
-mk_config_file(data_save_folder)
+
 
 # save cls_info_remained
 write.table(cls_info_remained,
