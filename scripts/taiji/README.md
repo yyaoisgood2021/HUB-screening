@@ -1,5 +1,5 @@
 # Procedures for Pseudobulk Taiji analysis
-1. Download single cell experiment data (scRNA-seq and scATAC-seq experiments, for both Ess and Noness libraries) using SRA Toolkit from SRA (corresponding to the GEO entry [GSE231384](https://www.ncbi.xyz/geo/query/acc.cgi?acc=GSE231384))
+1. Create a folder structure according to the [folder_tree.txt]. Download single cell experiment raw sequencing data to `results/data`. scRNA-seq and scATAC-seq experiments, for both Ess and Noness libraries. Use SRA Toolkit from SRA (corresponding to the GEO entry [GSE231384](https://www.ncbi.xyz/geo/query/acc.cgi?acc=GSE231384)). The commands below is an example:
    ```bash
    mkdir -p results/data/RNA/ess
    cd results/data/RNA/ess
@@ -15,21 +15,25 @@
                      --fastqs=results/data/RNA/ess \
                      --sample=22070FL-01-02-01
     ```
-    also count the Noness library. change the sample id, fastqs path and sample prefix accordingly
+    also count the Noness library. change the sample id, fastqs path and sample prefix accordingly.
+
+    then, combine Ess and Noness libraries.
     ```bash
     cellranger aggr --id=combined \
                     --csv=resources/taiji/cellranger_aggr_r.csv \
                     --nosecondary
     ```
 
-3. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/mk-indv-rna-clusters.R`. The statistics files for the clustering results `ess_rna.cls_info.npcs30_pc30.txt` and `noness_rna.cls_info.npcs30_pc30.txt` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).  
+4. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/mk-indv-rna-clusters.R`. The statistics files for the clustering results `ess_rna.cls_info.npcs30_pc30.txt` and `noness_rna.cls_info.npcs30_pc30.txt` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).  
     ```bash
-    Rscript scripts/taiji/filter_cells.R results/seurat_RNA/filtered results/proc_data/RNA/combined/outs/count/filtered_feature_bc_matrix
+    Rscript scripts/taiji/filter_cells.R \
+    results/seurat_RNA/filtered \
+    results/proc_data/RNA/combined/outs/count/filtered_feature_bc_matrix
     # results/seurat_RNA/filtered is the folder to save this command's output. for this and all output_save_folders below, make sure you have already created these folders
    
     
     Rscript scripts/taiji/mk-indv-rna-clusters.R \
-    results/seurat_RNA/filtered/hubs.high_quality.combined.s1.rds
+    results/seurat_RNA/filtered/hubs.high_quality.combined.s1.rds \
     results/seurat_RNA/clustered \
     n_pc n_pc_cls 
     # results/seurat_RNA/filtered/hubs.high_quality.combined.s1.rds is the seurat object generated from the last step
@@ -37,7 +41,7 @@
     # n_pc, n_pc_cls: hyperparameters for PCA and single-cell clustering. I'm using 30, 30 in my manuscript
     ```
 
-4. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count) (v7.0.0). If you downloaded the processed data from GEO, you can simply put them in the folder results/proc_data/ATAC and skip this step.
+5. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count) (v7.0.0). If you downloaded the processed data from GEO, you can simply put them in the folder results/proc_data/ATAC and skip this step.
 
     ```bash
     cellranger-atac count --id=ess \
@@ -46,7 +50,7 @@
     ```
     also count the Noness library. change the sample id and fastqs path accordingly
    
-5. Filter out the low-quality single cells in the scATAC experiments by running `scripts/taiji/filter_cells_atac.R`
+6. Filter out the low-quality single cells in the scATAC experiments by running `scripts/taiji/filter_cells_atac.R`
 
    ```bash
    Rscript scripts/taiji/filter_cells_atac.R \
@@ -60,7 +64,7 @@
    # results/seurat_ATAC/filtered: the folder to save the outputs of this command, the files to save the filtered ATAC objects are atac.{ess|noness}.s1.rds 
    ```
 
-6. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to integrate scATAC onto the scRNA experiments, and then extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/mk-psbulk-data.0.R` and then `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
+7. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to integrate scATAC onto the scRNA experiments, and then extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/mk-psbulk-data.0.R` and then `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
 
     ```bash
     Rscript scripts/taiji/mk-psbulk-data.0.R \
