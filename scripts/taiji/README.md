@@ -159,17 +159,17 @@
     # I'd recommend put taiji outputs to "results/taiji_results", you can modify this in the config.yml
     ```
 
-11. After you got the Taiji results, perform K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs).
+11. After you got the Taiji results, perform PCA and K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` to generate K-Means clusters and to identify top transcription factors (TFs). Lists of the significantly-changed TFs will be generated in the folder `results/taiji_results_analysis/cls-5.rep-0/TF_results` 
     ```bash
     Rscript scripts/taiji/post_taiji_analysis.0.R \
     results/taiji_results \
     results/taiji_results_analysis \
-    results/seurat_ATAC/clustered/stat_df.npcs30_pc30.3.txt \
+    results/seurat_ATAC/clustered/stat_df.npcs30_pc30.3.txt 
     
-
     # results/taiji_results: taiji_out_folder
     # results/taiji_results_analysis: save folder base
     ```
+    
 
 13. Finally, run `scripts/taiji/post_taiji_analysis.1.R` to analyze the corresponding regulatees.
 
