@@ -1,5 +1,5 @@
 # Procedures for Pseudobulk Taiji analysis
-1. Create a folder structure according to the [folder_tree.txt]. Download single cell experiment raw sequencing data to `results/data`. scRNA-seq and scATAC-seq experiments, for both Ess and Noness libraries. Use SRA Toolkit from SRA (corresponding to the GEO entry [GSE231384](https://www.ncbi.xyz/geo/query/acc.cgi?acc=GSE231384)). The commands below is an example:
+1. Create a folder structure according to the [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt). Download single cell experiment raw sequencing data to `results/data`. scRNA-seq and scATAC-seq experiments, for both Ess and Noness libraries. Use SRA Toolkit from SRA (corresponding to the GEO entry [GSE231384](https://www.ncbi.xyz/geo/query/acc.cgi?acc=GSE231384)). The commands below is an example:
    ```bash
    mkdir -p results/data/RNA/ess
    cd results/data/RNA/ess
@@ -184,7 +184,7 @@
 
     for tf_id in {1..200}
     do
-       python scripts/taiji/find_edges_ks.1.R ${tf_id} results/taiji_results_analysis
+       python scripts/taiji/find_changed_edges_ks.1.R ${tf_id} results/taiji_results_analysis
     done
 
 
