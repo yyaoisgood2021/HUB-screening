@@ -42,7 +42,7 @@ meta_df <- read.csv(
 network_folder_base <- file.path(taiji_out_folder, 'Network') 
 network_folder_save_base <- file.path(save_folder_base, 'Network_info', 'step0.filtered_edges.all')
 network_folder_save_base_2 <- file.path(save_folder_base, 'Network_info', 'step1.filtered_edges.TF')
-network_folder_save_base_3 <- file.path(save_folder_base, 'Network_info', 'step2.comnbined_edges')
+network_folder_save_base_3 <- file.path(save_folder_base, 'Network_info', 'step2.combined_edges')
 
 
 dir.create(network_folder_save_base, recursive = TRUE)
