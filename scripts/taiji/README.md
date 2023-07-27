@@ -1,13 +1,13 @@
 # Procedures for Pseudobulk Taiji analysis
-1. Create a folder structure according to the [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt). Download single cell experiment raw sequencing data to `results/data`. scRNA-seq and scATAC-seq experiments, for both Ess and Noness libraries. Use SRA Toolkit from SRA (corresponding to the GEO entry [GSE231384](https://www.ncbi.xyz/geo/query/acc.cgi?acc=GSE231384)). The commands below is an example:
+1. Create a folder structure according to the [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt). Download single cell experiment raw sequencing data to the corresponding sub-folders of `results/data`. scRNA-seq and scATAC-seq experiments, for both Ess and Noness libraries. Use SRA Toolkit from SRA (corresponding to the GEO entry [GSE231384](https://www.ncbi.xyz/geo/query/acc.cgi?acc=GSE231384)). The commands below is an example to download ess RNA-seq data:
    ```bash
    mkdir -p results/data/RNA/ess
    cd results/data/RNA/ess
    prefetch SRR24376123 
    ```
-   then unzip the fastq.gz files, and repeat the codes to download fastq files for the noness library and ATAC-seq experiments. You can also download the processed data and put them in `results/proc_data`.
+   then unzip the fastq.gz files, and repeat the codes to download fastq files for the noness library and for ATAC-seq experiments. You can also download the processed data and put them in the corresponding sub-folders of `results/proc_data`.
 
-2. Process scRNA-seq raw sequencing data and save to `results/proc_data/RNA`. Use `cellranger count` to count fastq files for both Ess and Noness libraries, then use `cellranger aggr` to combine two libraries. If you download the processed files from GEO, you can put them in results/proc_data/RNA and directly run `cellranger aggr`. Run all the steps with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) (v7.0.0). The sample csv file `cellranger_aggr_r.csv` required by the `cellranger aggr` command can be obtained from [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
+3. Process scRNA-seq raw sequencing data and save to sub-folders of `results/proc_data/RNA` (creating folder structrue referring to [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt), same for all codes below). Use `cellranger count` to count fastq files for both Ess and Noness libraries, then use `cellranger aggr` to combine two libraries. If you download the processed files from GEO, you can put them in the corresponding sub-folders of results/proc_data/RNA and directly run `cellranger aggr`. Run all the steps with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) (v7.0.0). The sample csv file `cellranger_aggr_r.csv` required by the `cellranger aggr` command can be obtained from [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).
     ```bash
     # count the ess library 
     cellranger count --id=ess
@@ -17,18 +17,19 @@
     ```
     also count the Noness library. change the sample id, fastqs path and sample prefix accordingly.
 
-    then, combine Ess and Noness libraries.
+    then, combine Ess and Noness libraries. 
     ```bash
     cellranger aggr --id=combined \
                     --csv=resources/taiji/cellranger_aggr_r.csv \
                     --nosecondary
     ```
-3. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/mk-indv-rna-clusters.R`. The statistics files for the clustering results `ess_rna.cls_info.npcs30_pc30.txt` and `noness_rna.cls_info.npcs30_pc30.txt` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).  
+4. Generate clusters of single cells based on scRNA-seq data using Seurat (v4.1.0) [(ref)](https://satijalab.org/seurat/). To fulfill this, you need to run `scripts/taiji/filter_cells.R` to remove low quality single cells, then run `scripts/taiji/mk-indv-rna-clusters.R` to cluster single cells. The statistics files for the clustering results `ess_rna.cls_info.npcs30_pc30.txt` and `noness_rna.cls_info.npcs30_pc30.txt` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji).  
     ```bash
     Rscript scripts/taiji/filter_cells.R \
     results/seurat_RNA/filtered \
     results/proc_data/RNA/combined/outs/count/filtered_feature_bc_matrix
-    # results/seurat_RNA/filtered is the folder to save this command's output. for this and all output_save_folders below, make sure you have already created these folders
+    # results/seurat_RNA/filtered is the folder to save this command's output.
+    # for this and all output_save_folders below, make sure you have already created these folders
    
     Rscript scripts/taiji/mk-indv-rna-clusters.R \
     results/seurat_RNA/filtered/hubs.high_quality.combined.s1.rds \
@@ -39,7 +40,7 @@
     # n_pc, n_pc_cls: hyperparameters for PCA and single-cell clustering. I'm using 30, 30 in my manuscript
     ```
 
-4. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count) (v7.0.0). If you downloaded the processed data from GEO, you can simply put them in the folder results/proc_data/ATAC and skip this step.
+5. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count) (v7.0.0). If you downloaded the processed data from GEO, you can simply put them in the folder results/proc_data/ATAC and skip this step.
 
     ```bash
     cellranger-atac count --id=ess \
@@ -48,7 +49,7 @@
     ```
     also count the Noness library. change the sample id and fastqs path accordingly
    
-5. Filter out the low-quality single cells in the scATAC experiments by running `scripts/taiji/filter_cells_atac.R`
+6. Filter out the low-quality single cells in the scATAC experiments by running `scripts/taiji/filter_cells_atac.R`
 
    ```bash
    Rscript scripts/taiji/filter_cells_atac.R \
@@ -62,7 +63,7 @@
    # results/seurat_ATAC/filtered: the folder to save the outputs of this command, the files to save the filtered ATAC objects are atac.{ess|noness}.s1.rds 
    ```
 
-6. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to integrate scATAC onto the scRNA experiments, and then extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/mk-psbulk-data.0.R` and then `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
+7. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to integrate scATAC onto the scRNA experiments, and then extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/mk-psbulk-data.0.R` and then `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
 
     ```bash
     Rscript scripts/taiji/mk-psbulk-data.0.R \
@@ -102,7 +103,7 @@
     ```
     After this command, you will see the gene count tsv file and atac fragment bed.gz file for each pseudobulk cluster. A statistics file named `cls-info-remained.txt` is also generated. You can check the numbers in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources/taiji)
    
-7. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
+8. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
    
    * ATAC peaks: [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/), directly download the bed narrow peak file in the GRCh38 assembly and save to `results/proc_data/ATAC/WT/ENCFF976CEI.bed`
    * RNA counts:
@@ -129,7 +130,7 @@
      
      iv. sum up all the results and save it as `results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt`. There's no need to normalize.
 
-8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` and `input.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/). You must change the paths in the `config.yml` manually, then you can save the file with correct paths to `results/taiji_commands/config.yml`. Run the following command to generate `results/taiji_commands/input.yml`. More explanations can be found in the [scripts](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji/prep_input_config.py).
+9. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` and `input.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/). You must change the paths in the `config.yml` manually, then you can save the file with correct paths to `results/taiji_commands/config.yml`. Run the following command to generate `results/taiji_commands/input.yml`. More explanations can be found in the [scripts](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji/prep_input_config.py).
    ```bash
    python scripts/taiji/prep_input_config.py \
    results/taiji_datasets/npcs30_pc30.3/cls-info-remained.txt \
@@ -144,7 +145,7 @@
    # path to save the results
    ```
    
-9. Run Taiji following the [instruction](https://taiji-pipeline.github.io/).
+10. Run Taiji following the [instruction](https://taiji-pipeline.github.io/).
     ```bash
     ml load taiji
     progress_folder=results/taiji_progresses # this folder save the progresses so you can resume job
@@ -157,7 +158,7 @@
     # I'd recommend put taiji outputs to "results/taiji_results", you can modify this in the config.yml
     ```
 
-10. After you got the Taiji results, perform PCA and K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` first to generate K-Means clusters and to identify top transcription factors (TFs). Lists of the significantly-changed TFs will be generated in the folder `results/taiji_results_analysis/cls-5.rep-0/TF_results` 
+11. After you got the Taiji results, perform PCA and K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` first to generate K-Means clusters and to identify top transcription factors (TFs). Lists of the significantly-changed TFs will be generated in the folder `results/taiji_results_analysis/cls-5.rep-0/TF_results` 
     ```bash
     Rscript scripts/taiji/post_taiji_analysis.0.R \
     results/taiji_results \
@@ -168,7 +169,7 @@
     # results/taiji_results_analysis: save folder base
     ```
    
-11. Finally, run the following commands to derive the significantly-changed (TF -> regulatee gene) edges and the results will be generated in the folder ``.
+12. Finally, run the following commands to derive the significantly-changed (TF -> regulatee gene) edges and the results will be generated in the folder ``.
     ```bash 
     Rscript scripts/taiji/prepare_edges.1.R \
     results/taiji_results \
