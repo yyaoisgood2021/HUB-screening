@@ -19,6 +19,7 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
 	
  	ii. Hi-C data (`GSE63525_K562_combined_30.hic`) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
 
+	iii. download all data according to file [download_chip_dt.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/download_chip_dt.txt)
 
 3. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
 
@@ -44,9 +45,9 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
    # oe represents observed/expected values
    # the commands then used calc_pvalue.py to fit a Poisson distribution to derive a p-value for each interaction on each {chrid}
    ```
-3. then generate fragment contact network (FCN) for each chromosome according to procedure:
+4. then generate fragment contact network (FCN) for each chromosome according to procedure:
 
-	i. run `generate_eligible_coords` for each chr and put the results in `coord_save_folder`
+	i. run all cells in `generate_eligible_coords.ipynb` for each chr and put the results in `coord_save_folder`
 
  	ii. run the following bash commands to generate node_meta, for each chromosome, for each feature
 
