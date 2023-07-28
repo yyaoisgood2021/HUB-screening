@@ -1,4 +1,4 @@
-HUB-screening
+HUB-screening folder tree 
 ############# provided ####################################################
 +----resources
 |    +----taiji
@@ -18,6 +18,10 @@ HUB-screening
 |    TableS12.data-source.xlsx
 |    download_chip_dt.txt
 |    K562.chr1.res_5000.partial.txt
+|    ess_gene.Morgens.txt
+|    ess_gene.Wang.txt
+|    lncRNA.Liu.txt
+
 +----scripts
 |    +----taiji
 |    |    README.md
@@ -225,19 +229,71 @@ folder_tree.txt
 |    |    |    +----step3.changed_edges.unadjusted 
 |    |    |    |    raw.eligible_edges.ARID3A.txt
 |    |    |    |    raw.eligible_edges.ARID5B.txt
-|
+
 +----CNN-AE-LR
 |    +----data
 |    |    +----hg19
 |    |    |    chr1.fa
 |    +----models
 |    |    +----ext_0.rep_0
-|
+
 +----PR-LR
 |    +----data
-
-
-
+|    |    sciadv.abi6020_table_s11.xlsx
+|    |    GSE63525_K562_combined_30.hic
+|    |    CTCF.narrow.rep-1.hg19.bed
+|    |    CTCF.narrow.rep-2.hg19.bed
+|    |    H3K27ac.narrow.rep-1.hg19.bed 
+|    |    H3K27me3.broad.rep-2.hg19.bed 
+|    |    H3K27me3.narrow.rep-1.hg19.bed
+|    |    H3K36me3.broad.rep-3.hg19.bed
+|    |    H3K36me3.narrow.rep-1.hg19.bed
+|    |    H3K36me3.narrow.rep-2.hg19.bed
+|    |    H3K4me1.narrow.rep-1.hg19.bed 
+|    |    H3K4me1.narrow.rep-2.hg19.bed
+|    |    H3K4me2.narrow.rep-1.hg19.bed   
+|    |    H3K4me3.narrow.rep-1.hg19.bed
+|    |    H3K4me3.narrow.rep-2.hg19.bed
+|    |    H3K9ac.narrow.rep-1.hg19.bed 
+|    |    H3K9ac.narrow.rep-2.hg19.bed
+|    |    H3K9me3.broad.rep-2.hg19.bed
+|    |    H3K9me3.narrow.rep-1.hg19.bed
+|    |    H4K20me1.narrow.rep-1.hg19.bed
+|    |    RAD21.narrow.rep-1.hg19.bed
+|    |    RAD21.narrow.rep-2.hg19.bed
+|    |    SMC3.narrow.rep-1.hg19.bed
+|    |    blacklist.bed6format.bed
+|    |    ATAC.hg19.bed 
+|    |    ess_gene.Morgens.hg19.bed
+|    |    ess_gene.Wang.hg19.bed
+|    |    lncRNA.Liu.hg19.bed
+|    |    all_gene.hg19.bed
+|    +----proc_HiC
+|    |    +----hic.dump
+|    |    |    VC_observed.chr1.5000.txt
+|    |    |    VC_oe.chr1.5000.txt
+|    |    |    VC_combined.chr1.5000.txt
+|    |    +----inter.prob.ref
+|    |    |    chr1_K562_prob.5000.txt
+|    +----eligible_coordinates
+|    |    eligible_coordinates.chr1.hg19.bed
+|    |    eligible_coordinates.before_translocg.chr9.hg19.bed
+|    |    eligible_coordinates.before_translocg.chr22.hg19.bed
+|    |    eligible_coordinates.after_translocg.chr9.hg19.bed
+|    |    eligible_coordinates.after_translocg.chr22.hg19.bed
+|    +----overlap_coords
+|    |    ATAC.chr1.bed 
+|    +----node_meta.0
+|    |    chr1.txt
+|    +----node_meta.1
+|    |    chr1.txt
+|    +----eligible_edges
+|    |    chr1.txt
+|    +----PR_scores
+|    |    +----raw
+|    |    |    result.chr1.0.txt
+|    |    +----proc
+|    |    |    result.chr1.1.txt
 
 
 
