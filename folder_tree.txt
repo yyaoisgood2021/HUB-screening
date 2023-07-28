@@ -2,18 +2,28 @@ HUB-screening
 ############# provided ####################################################
 +----resources
 |    +----taiji
-|    |    |    cellranger_aggr_r.csv
-|    |    |    ess_rna.cls_info.npcs30_pc30.txt
-|    |    |    noness_rna.cls_info.npcs30_pc30.txt
-|    |    |    stat_df.npcs30_pc30.3.txt
-|    |    |    cls-info-remained.txt
-|    |    |    input.yml
-|    |    |    config.yml
-
+|    |    cellranger_aggr_r.csv
+|    |    ess_rna.cls_info.npcs30_pc30.txt
+|    |    noness_rna.cls_info.npcs30_pc30.txt
+|    |    stat_df.npcs30_pc30.3.txt
+|    |    cls-info-remained.txt
+|    |    input.yml
+|    |    config.yml
+|    +----ext_0.rep_2
+|    |    Ep_200-val_loss_0.02.hdf5
+|    |    hub_PC30.1st.withGC.1.txt
+|    |    random_seeds.txt
+|    all_hubs.txt
+|    TableS4.hub_screening_results.xlsx
+|    TableS12.data-source.xlsx
+|    download_chip_dt.txt
+|    K562.chr1.res_5000.partial.txt
 +----scripts
-|    LICENSE.md
-|    README.md
-|    folder_tree.txt
+|    +----taiji
+|    |    README.md
+LICENSE.md
+README.md
+folder_tree.txt
 
 
 ############# generated ###################################################
@@ -30,8 +40,8 @@ HUB-screening
 |    |    |    |    +----ENCSR637VLS
 |    |    |    |    +----ENCSR000CPH
 |    |    |    |    +----ENCSR000AEM
-|    |    |    |    |    |    ENCFF001RED.fastq
-|    |    |    |    |    |    ENCFF001RDZ.fastq
+|    |    |    |    |    ENCFF001RED.fastq
+|    |    |    |    |    ENCFF001RDZ.fastq
 |    |    |    |    +----ENCSR000AEO
 |    |    +----ATAC
 |    |    |    +----ess
@@ -59,109 +69,109 @@ HUB-screening
 |    |    |    |    |    rep1-q30-ReadsPerGene.out.tab
 |    |    |    |    |    rep1-q30-ReadsPerGene.name_converted.txt
 |    |    |    +----WT.combined
-|    |    |    |    |    WT.rna-expr-pscounts.txt
+|    |    |    |    WT.rna-expr-pscounts.txt
 |    |    +----ATAC
 |    |    |    +----ess
 |    |    |    |    +----outs 
-|    |    |    |    |    |    filtered_peak_bc_matrix.h5
-|    |    |    |    |    |    singlecell.csv
-|    |    |    |    |    |    fragments.tsv.gz  
+|    |    |    |    |    filtered_peak_bc_matrix.h5
+|    |    |    |    |    singlecell.csv
+|    |    |    |    |    fragments.tsv.gz  
 |    |    |    +----noness
 |    |    |    |    +----outs 
-|    |    |    |    |    |    filtered_peak_bc_matrix.h5 
-|    |    |    |    |    |    singlecell.csv
-|    |    |    |    |    |    fragments.tsv.gz 
+|    |    |    |    |    filtered_peak_bc_matrix.h5 
+|    |    |    |    |    singlecell.csv
+|    |    |    |    |    fragments.tsv.gz 
 |    |    |    +----WT
 |    |    |    |     ENCFF976CEI.bed 
 |    +----seurat_RNA
-|    |    |    +----filtered
-|    |    |    |    |    hubs.high_quality.combined.s1.rds
-|    |    |    +----clustered
-|    |    |    |    |    ess_rna.with_cluster_info.npcs30_pc30.s2.rds
-|    |    |    |    |    noness_rna.with_cluster_info.npcs30_pc30.s2.rds
-|    |    |    |    |    ess_rna.cls_info.npcs30_pc30.txt
-|    |    |    |    |    noness_rna.cls_info.npcs30_pc30.txt
+|    |    +----filtered
+|    |    |    hubs.high_quality.combined.s1.rds
+|    |    +----clustered
+|    |    |    ess_rna.with_cluster_info.npcs30_pc30.s2.rds
+|    |    |    noness_rna.with_cluster_info.npcs30_pc30.s2.rds
+|    |    |    ess_rna.cls_info.npcs30_pc30.txt
+|    |    |    noness_rna.cls_info.npcs30_pc30.txt
 |    +----seurat_ATAC
-|    |    |    +----filtered
-|    |    |    |    |    atac.ess.s0.rds
-|    |    |    |    |    atac.noness.s0.rds
-|    |    |    |    |    atac.ess.s1.rds
-|    |    |    |    |    atac.noness.s1.rds
-|    |    |    +----clustered
-|    |    |    |    |    stat_df.npcs30_pc30.3.txt
-|    |    |    |    |    atac-just-before-anchor-transfer.ess.npcs30_pc30.s2.rds
-|    |    |    |    |    atac-just-before-anchor-transfer.noness.npcs30_pc30.s2.rds
-|    |    |    |    |    atac-after-anchor-transfer.ess.npcs30_pc30.3.s2.rds
-|    |    |    |    |    atac-after-anchor-transfer.noness.npcs30_pc30.3.s2.rds
+|    |    +----filtered
+|    |    |    atac.ess.s0.rds
+|    |    |    atac.noness.s0.rds
+|    |    |    atac.ess.s1.rds
+|    |    |    atac.noness.s1.rds
+|    |    +----clustered
+|    |    |    stat_df.npcs30_pc30.3.txt
+|    |    |    atac-just-before-anchor-transfer.ess.npcs30_pc30.s2.rds
+|    |    |    atac-just-before-anchor-transfer.noness.npcs30_pc30.s2.rds
+|    |    |    atac-after-anchor-transfer.ess.npcs30_pc30.3.s2.rds
+|    |    |    atac-after-anchor-transfer.noness.npcs30_pc30.3.s2.rds
 |    +----taiji_datasets
-|    |    |    +----npcs30_pc30.3
-|    |    |    |    cls-info-remained.txt  
-|    |    |    |    ess-0.atac-fragments.bed.gz  
-|    |    |    |    ess-11.atac-fragments.bed.gz  
-|    |    |    |    ess-13.atac-fragments.bed.gz  
-|    |    |    |    ess-14.atac-fragments.bed.gz  
-|    |    |    |    ess-15.atac-fragments.bed.gz  
-|    |    |    |    ess-17.atac-fragments.bed.gz  
-|    |    |    |    ess-1.atac-fragments.bed.gz  
-|    |    |    |    ess-20.atac-fragments.bed.gz  
-|    |    |    |    ess-24.atac-fragments.bed.gz  
-|    |    |    |    ess-2.atac-fragments.bed.gz  
-|    |    |    |    ess-3.atac-fragments.bed.gz  
-|    |    |    |    ess-4.atac-fragments.bed.gz  
-|    |    |    |    ess-5.atac-fragments.bed.gz  
-|    |    |    |    ess-6.atac-fragments.bed.gz  
-|    |    |    |    ess-8.atac-fragments.bed.gz  
-|    |    |    |    noness-0.atac-fragments.bed.gz 
-|    |    |    |    noness-10.atac-fragments.bed.gz 
-|    |    |    |    noness-11.atac-fragments.bed.gz 
-|    |    |    |    noness-12.atac-fragments.bed.gz 
-|    |    |    |    noness-13.atac-fragments.bed.gz 
-|    |    |    |    noness-14.atac-fragments.bed.gz 
-|    |    |    |    noness-17.atac-fragments.bed.gz  
-|    |    |    |    noness-18.atac-fragments.bed.gz 
-|    |    |    |    noness-1.atac-fragments.bed.gz 
-|    |    |    |    noness-21.atac-fragments.bed.gz 
-|    |    |    |    noness-2.atac-fragments.bed.gz 
-|    |    |    |    noness-3.atac-fragments.bed.gz 
-|    |    |    |    noness-4.atac-fragments.bed.gz 
-|    |    |    |    noness-5.atac-fragments.bed.gz 
-|    |    |    |    noness-6.atac-fragments.bed.gz 
-|    |    |    |    noness-7.atac-fragments.bed.gz 
-|    |    |    |    noness-8.atac-fragments.bed.gz 
-|    |    |    |    noness-9.atac-fragments.bed.gz 
-|    |    |    |    ess-0.rna-expr-pscounts.txt  
-|    |    |    |    ess-11.rna-expr-pscounts.txt
-|    |    |    |    ess-13.rna-expr-pscounts.txt  
-|    |    |    |    ess-14.rna-expr-pscounts.txt  
-|    |    |    |    ess-15.rna-expr-pscounts.txt  
-|    |    |    |    ess-17.rna-expr-pscounts.txt 
-|    |    |    |    ess-1.rna-expr-pscounts.txt 
-|    |    |    |    ess-20.rna-expr-pscounts.txt
-|    |    |    |    ess-24.rna-expr-pscounts.txt 
-|    |    |    |    ess-2.rna-expr-pscounts.txt 
-|    |    |    |    ess-3.rna-expr-pscounts.txt 
-|    |    |    |    ess-4.rna-expr-pscounts.txt  
-|    |    |    |    ess-5.rna-expr-pscounts.txt  
-|    |    |    |    ess-6.rna-expr-pscounts.txt  
-|    |    |    |    ess-8.rna-expr-pscounts.txt  
-|    |    |    |    noness-0.rna-expr-pscounts.txt
-|    |    |    |    noness-10.rna-expr-pscounts.txt
-|    |    |    |    noness-11.rna-expr-pscounts.txt
-|    |    |    |    noness-12.rna-expr-pscounts.txt
-|    |    |    |    noness-13.rna-expr-pscounts.txt
-|    |    |    |    noness-14.rna-expr-pscounts.txt
-|    |    |    |    noness-17.rna-expr-pscounts.txt  
-|    |    |    |    noness-18.rna-expr-pscounts.txt
-|    |    |    |    noness-1.rna-expr-pscounts.txt
-|    |    |    |    noness-21.rna-expr-pscounts.txt 
-|    |    |    |    noness-2.rna-expr-pscounts.txt 
-|    |    |    |    noness-3.rna-expr-pscounts.txt
-|    |    |    |    noness-4.rna-expr-pscounts.txt
-|    |    |    |    noness-5.rna-expr-pscounts.txt
-|    |    |    |    noness-6.rna-expr-pscounts.txt 
-|    |    |    |    noness-7.rna-expr-pscounts.txt
-|    |    |    |    noness-8.rna-expr-pscounts.txt
-|    |    |    |    noness-9.rna-expr-pscounts.txt
+|    |    +----npcs30_pc30.3
+|    |    |    cls-info-remained.txt  
+|    |    |    ess-0.atac-fragments.bed.gz  
+|    |    |    ess-11.atac-fragments.bed.gz  
+|    |    |    ess-13.atac-fragments.bed.gz  
+|    |    |    ess-14.atac-fragments.bed.gz  
+|    |    |    ess-15.atac-fragments.bed.gz  
+|    |    |    ess-17.atac-fragments.bed.gz  
+|    |    |    ess-1.atac-fragments.bed.gz  
+|    |    |    ess-20.atac-fragments.bed.gz  
+|    |    |    ess-24.atac-fragments.bed.gz  
+|    |    |    ess-2.atac-fragments.bed.gz  
+|    |    |    ess-3.atac-fragments.bed.gz  
+|    |    |    ess-4.atac-fragments.bed.gz  
+|    |    |    ess-5.atac-fragments.bed.gz  
+|    |    |    ess-6.atac-fragments.bed.gz  
+|    |    |    ess-8.atac-fragments.bed.gz  
+|    |    |    noness-0.atac-fragments.bed.gz 
+|    |    |    noness-10.atac-fragments.bed.gz 
+|    |    |    noness-11.atac-fragments.bed.gz 
+|    |    |    noness-12.atac-fragments.bed.gz 
+|    |    |    |noness-13.atac-fragments.bed.gz 
+|    |    |    noness-14.atac-fragments.bed.gz 
+|    |    |    noness-17.atac-fragments.bed.gz  
+|    |    |    noness-18.atac-fragments.bed.gz 
+|    |    |    noness-1.atac-fragments.bed.gz 
+|    |    |    noness-21.atac-fragments.bed.gz 
+|    |    |    noness-2.atac-fragments.bed.gz 
+|    |    |    noness-3.atac-fragments.bed.gz 
+|    |    |    noness-4.atac-fragments.bed.gz 
+|    |    |    noness-5.atac-fragments.bed.gz 
+|    |    |    noness-6.atac-fragments.bed.gz 
+|    |    |    noness-7.atac-fragments.bed.gz 
+|    |    |    noness-8.atac-fragments.bed.gz 
+|    |    |    noness-9.atac-fragments.bed.gz 
+|    |    |    ess-0.rna-expr-pscounts.txt  
+|    |    |    ess-11.rna-expr-pscounts.txt
+|    |    |    ess-13.rna-expr-pscounts.txt  
+|    |    |    ess-14.rna-expr-pscounts.txt  
+|    |    |    ess-15.rna-expr-pscounts.txt  
+|    |    |    ess-17.rna-expr-pscounts.txt 
+|    |    |    ess-1.rna-expr-pscounts.txt 
+|    |    |    ess-20.rna-expr-pscounts.txt
+|    |    |    ess-24.rna-expr-pscounts.txt 
+|    |    |    ess-2.rna-expr-pscounts.txt 
+|    |    |    ess-3.rna-expr-pscounts.txt 
+|    |    |    ess-4.rna-expr-pscounts.txt  
+|    |    |    ess-5.rna-expr-pscounts.txt  
+|    |    |    ess-6.rna-expr-pscounts.txt  
+|    |    |    ess-8.rna-expr-pscounts.txt  
+|    |    |    noness-0.rna-expr-pscounts.txt
+|    |    |    noness-10.rna-expr-pscounts.txt
+|    |    |    noness-11.rna-expr-pscounts.txt
+|    |    |    noness-12.rna-expr-pscounts.txt
+|    |    |    noness-13.rna-expr-pscounts.txt
+|    |    |    noness-14.rna-expr-pscounts.txt
+|    |    |    noness-17.rna-expr-pscounts.txt  
+|    |    |    noness-18.rna-expr-pscounts.txt
+|    |    |    noness-1.rna-expr-pscounts.txt
+|    |    |    noness-21.rna-expr-pscounts.txt 
+|    |    |    noness-2.rna-expr-pscounts.txt 
+|    |    |    noness-3.rna-expr-pscounts.txt
+|    |    |    noness-4.rna-expr-pscounts.txt
+|    |    |    noness-5.rna-expr-pscounts.txt
+|    |    |    noness-6.rna-expr-pscounts.txt 
+|    |    |    noness-7.rna-expr-pscounts.txt
+|    |    |    noness-8.rna-expr-pscounts.txt
+|    |    |    noness-9.rna-expr-pscounts.txt
 |    +----taiji_commands
 |    |    config.yml
 |    |    input.yml
@@ -215,6 +225,18 @@ HUB-screening
 |    |    |    +----step3.changed_edges.unadjusted 
 |    |    |    |    raw.eligible_edges.ARID3A.txt
 |    |    |    |    raw.eligible_edges.ARID5B.txt
+|
++----CNN-AE-LR
+|    +----data
+|    |    +----hg19
+|    |    |    chr1.fa
+|    +----models
+|    |    +----ext_0.rep_0
+|
++----PR-LR
+|    +----data
+
+
 
 
 
