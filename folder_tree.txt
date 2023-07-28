@@ -200,6 +200,7 @@ HUB-screening
 |    |    |    |    tf_stats.all.2.sig_TFs.down.FC-2.csv
 |    |    |    |    tf_stats.all.2.sig_TFs.FC-2.csv
 |    |    |    +----edge_results
+|    |    |    |    all_significantly_changed_edges.txt
 |    |    +----Network_info
 |    |    |    +----step0.filtered_edges.all 
 |    |    |    |    filtered_edges.WT.txt
@@ -212,7 +213,8 @@ HUB-screening
 |    |    |    |    combined_edges.ARID3A.txt
 |    |    |    |    combined_edges.ARID5B.txt
 |    |    |    +----step3.changed_edges.unadjusted 
-
+|    |    |    |    raw.eligible_edges.ARID3A.txt
+|    |    |    |    raw.eligible_edges.ARID5B.txt
 
 
 
