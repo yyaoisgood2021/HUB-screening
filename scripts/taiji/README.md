@@ -169,7 +169,7 @@
     # results/taiji_results_analysis: save folder base
     ```
    
-12. Finally, run the following commands to derive the significantly-changed (TF -> regulatee gene) edges and the results will be generated in the folder ``.
+12. Finally, run the following commands to derive the significantly-changed (TF -> regulatee gene) edges and the results will be generated in the folder `results/taiji_results_analysis/cls-5.rep-0/edge_results`.
     ```bash 
     Rscript scripts/taiji/prepare_edges.1.R \
     results/taiji_results \
@@ -180,15 +180,11 @@
     # so that the commands inside of the "for loop" can be run in parallel to save time. 
     for tf_id in {1..200}
     do
-       Rscript scripts/taiji/weight_changed_edges.1.R ${tf_id} results/taiji_results results/taiji_results_analysis
+       Rscript scripts/taiji/weight_changed_edges.2.R ${tf_id} results/taiji_results results/taiji_results_analysis
+       python scripts/taiji/find_changed_edges_ks.3.py ${tf_id} results/taiji_results_analysis
     done
 
-    for tf_id in {1..200}
-    do
-       python scripts/taiji/find_changed_edges_ks.1.R ${tf_id} results/taiji_results_analysis
-    done
-
-
+    python scripts/taiji/summarize.4.py results/taiji_results_analysis
     ```
 
 
