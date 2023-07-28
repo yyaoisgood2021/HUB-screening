@@ -20,14 +20,15 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
  	ii. Hi-C data (`GSE63525_K562_combined_30.hic`) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
 
 
-3. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands:
+3. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
 
 ```bash
 juicer_path=path/to/juicer_tools.jar # change this line to the actual path to juicer_tools.jar
 
 sv_folder_1=PR-LR/proc_HiC/hic.dump
 sv_folder_2=PR-LR/proc_HiC/inter.prob.ref
-
+mkdir -p ${sv_folder_1}
+mkdir -p ${sv_folder_2}
 
 for chr_num in {1..22} X
 do
@@ -38,13 +39,9 @@ do
   python scripts/calc_pvalue.py ${sv_folder_1}/VC_combined.${chrid}.5000.txt ${sv_folder_2}/${chrid}_K562_prob.5000.txt
 done
 
-
-
-
-
-
-
-
+# the above commands first used juicer_tools.jar to dump HiC contact map to {sv_folder_1}, using VC normalization, on a resolution of 5000, on each {chrid}
+# oe represents observed/expected values
+# the commands then used calc_pvalue.py to fit a Poisson distribution to derive a p-value for each interaction on each {chrid}
 ```
 3. then generate fragment contact network (FCN) for each chromosome according to procedure:
 
