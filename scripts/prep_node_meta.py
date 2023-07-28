@@ -3,8 +3,7 @@
 """
 Created on Mon Jan  9 21:24:19 2023
 
-this script converts the overlap.{feature}.{chrid}.bed to node_meta
-
+this script converts the {feature}.{chrid}.bed to node_meta
 
 @author: peiyaowu
 """
@@ -31,13 +30,13 @@ for chrid in chrid_list:
     node_f[1] = node_f[1].astype(str)
     node_f['str'] = node_f[0] + ['-']*len(node_f) + node_f[1]
     for chip in list(chip_dt['name'])+['ATAC']:
-        overlap_dt = pd.read_csv(os.path.join(overlap_folder, 'overlap.{}.{}.bed'.format(chip, chrid)), sep='\t', header=None, )
+        overlap_dt = pd.read_csv(os.path.join(overlap_folder, '{}.{}.bed'.format(chip, chrid)), sep='\t', header=None, )
         no_over_site_coord = list(overlap_dt[overlap_dt[4]==-1][1].astype(str)) # no overlapping site's coordinate
         node_f[chip] = 1 # set all node as 1 (with peaks)
         node_f.iloc[node_f[1].isin(no_over_site_coord), -1] = 0 # use bool indexer to set 0 : overlap==-1 
 
     # save node_f
-    node_f.to_csv(os.path.join(result_sv_folder, 'node_meta.0.{}.txt'.format(chrid)),
+    node_f.to_csv(os.path.join(result_sv_folder, '{}.txt'.format(chrid)),
                 sep='\t', index=None)
 
 print('done')
