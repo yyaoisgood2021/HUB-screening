@@ -21,9 +21,11 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
 
 	iii. Download all feature data according to file [download_chip_dt.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/download_chip_dt.txt), then rename the files according to folder_tree.txt. Also download ATAC-seq narrow peak file from ENCODE [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/) (Note ENCFF330SHG and ENCFF976CEI are hg38 and you need to lift them over to hg19)
 
-	iv. Obtain gene essentiality data from [Wang et al. 2015](https://www.science.org/doi/10.1126/science.aac7041), [Morgen et al. 2016](https://www.nature.com/articles/nbt.3567), and long non-coding RNA essentiality data from [Liu et al. 2018](https://www.nature.com/articles/nbt.4283)  
+	iv. Obtain the essential genes data from [Wang et al. 2015](https://www.science.org/doi/10.1126/science.aac7041), [Morgen et al. 2016](https://www.nature.com/articles/nbt.3567), and long non-coding RNA essentiality data from [Liu et al. 2018](https://www.nature.com/articles/nbt.4283). These files have already been downloaded to [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources). Identify the essential genes and lncRNAs and extract their genomic coordinates using [gencode](https://www.gencodegenes.org/human/release_19.html) (hg19), save the bed files to `PR-LR/data`.
 
-4. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
+	v. Also extract the genomic coordinates of all genes from gencode (hg19) and save to `PR-LR/data`.
+
+3. then generate `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
 
    ```bash
    juicer_path=path/to/juicer_tools.jar # change this line to the actual path to juicer_tools.jar
@@ -49,13 +51,13 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
    ```
    File `K562.chr1.res_5000.partial.txt` in the folder [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources) displays the top 5000 lines of the expected output for chr1.
 
-5. then generate fragment contact network (FCN) for each chromosome according to procedure:
+4. Generate fragment contact network (FCN) for each chromosome according to procedure:
 
 	i. run all cells in `generate_eligible_coords.ipynb` for each chr and put the results in `PR-LR/eligible_coordinates`
 
  	ii. generate node_meta information using the next two steps:
 
- 	* overlap eligible_coords with peaks of a feature using bedtools. The following example command implements overlapping of all eligible nodes on chr1 with feature `CTCF.narrow.rep-1.hg19.bed`. Repeat this code for all chromosomes, and for ATAC and all features mentioned in the download_chip_dt.txt (except black-list annotation)
+ 	* overlap eligible_coords with peaks of a feature using bedtools. The following example command implements overlapping of all eligible nodes on chr1 with feature `CTCF.narrow.rep-1.hg19.bed`. Repeat this code for all chromosomes, and for all features mentioned in the step 2.iii ~ 2.v (except black-list annotation)
 
 	```bash
 	chrid=chr1
@@ -73,9 +75,9 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
  	python scripts/prep_node_meta.py PR-LR/eligible_coordinates PR-LR/overlap_coords PR-LR/node_meta.0
  	```
  
- 	iii. run all cells in `PR.ipynb` to build FCNs, and perform personalized PR. The PR results for all chromosomes will be generated in the folder `PR-LR/PR_scores/proc`. 
+5. run all cells in `PR.ipynb` to build FCNs, and perform personalized PR. The PR results for all chromosomes will be generated in the folder `PR-LR/PR_scores/proc`. 
 
-	iv. run `LR` to train a LR classifer for hub essentiality (you may want to modify the codes)
+6. run all cells in `LR.ipynb` to train a LR classifer for hub essentiality. 
 
 ### Section 3 "Simple path analysis on the hub pairs"
 
