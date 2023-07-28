@@ -29,7 +29,7 @@ for chrid in chrid_list:
     node_f = pd.read_csv(os.path.join(coord_folder, 'eligible_coordinates.{}.hg19.bed'.format(chrid)), sep='\t', header=None)
     node_f[1] = node_f[1].astype(str)
     node_f['str'] = node_f[0] + ['-']*len(node_f) + node_f[1]
-    for chip in list(chip_dt['name'])+['ATAC']:
+    for chip in (list(chip_dt['name'])+['ATAC', 'ess_gene.Morgens', 'ess_gene.Wang', 'lncRNA.Liu', 'all_gene']):
         overlap_dt = pd.read_csv(os.path.join(overlap_folder, '{}.{}.bed'.format(chip, chrid)), sep='\t', header=None, )
         no_over_site_coord = list(overlap_dt[overlap_dt[4]==-1][1].astype(str)) # no overlapping site's coordinate
         node_f[chip] = 1 # set all node as 1 (with peaks)
