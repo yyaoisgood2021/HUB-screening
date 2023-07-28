@@ -4,37 +4,46 @@ This is the code for the manuscript: "Distinct 3D contacts and phenotypic conseq
 
 ### Section 1 "Constructing and training of logistic regression to facilitate candidate selection"
 
-To run `CNN-AE-LR`, you need to prepare the sequence data for each chromosome (hg19): download from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/), and save files to resources/hg19/
+To run `CNN-AE-LR`, you need to prepare the sequence data for each chromosome (chr1 ~ chr22, and chrX) (hg19): download from [UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/), and save files to CNN-AE-LR/data/hg19/
 
 Then, you can run codes in scripts/CNN-AE-LR.ipynb
 
 
 ### Section 2 "Classifying hub essentiality with sequence and epigenetic features"
 
-To run codes in this section, you need to install [juicer](https://github.com/aidenlab/juicer) (v1.6) and [bedtools](https://bedtools.readthedocs.io/en/latest/index.html).
+1. To run codes in this section, you need to install [juicer](https://github.com/aidenlab/juicer) (v1.6) and [bedtools](https://bedtools.readthedocs.io/en/latest/index.html).
 
-1. you need to download the following data:
+2. Download the following data and put them in the designated folder `PR-LR/data`, the expected folder tree structure is displayed in [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt):
    
-	i. `TableS11` from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020)
+	i. supplementary table `sciadv.abi6020_table_s11.xlsx` from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020)
 	
- 	ii. `TableS4` from this manuscript, data is copied to [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
-	
- 	iii. Hi-C data (`inter_30.hic`) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
+ 	ii. Hi-C data (`GSE63525_K562_combined_30.hic`) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
 
-	iv. Download the feature data in the bed format, refer to `TableS12` and `download_chip_dt.txt` from this manuscript in [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources)
 
-2. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands:
+3. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands:
 
 ```bash
-chrid=chr1 # change this value for different chromosomes
+juicer_path=path/to/juicer_tools.jar # change this line to the actual path to juicer_tools.jar
 
-java -jar path/to/juicer_tools.jar dump observed VC path/to/inter_30.hic ${chrid} ${chrid} BP 5000 path/to/save_folder/VC_observed.${chrid}.5000.txt
+sv_folder_1=PR-LR/proc_HiC/hic.dump
+sv_folder_2=PR-LR/proc_HiC/inter.prob.ref
 
-java -jar path/to/juicer_tools.jar dump oe VC path/to/inter_30.hic ${chrid} ${chrid} BP 5000 path/to/save_folder/VC_oe.${chrid}.5000.txt
 
-paste path/to/save_folder/VC_observed.${chrid}.5000.txt path/to/save_folder/VC_oe.${chrid}.5000.txt | awk '{print $1 "\t" $2 "\t" $3 "\t" $6 "\t" $3 / $6}' > path/to/save_folder/VC_combined.${chrid}.5000.txt
+for chr_num in {1..22} X
+do
+  chrid=chr${chr_num}
+  java -jar ${juicer_path} dump observed VC PR-LR/data/GSE63525_K562_combined_30.hic ${chrid} ${chrid} BP 5000 ${sv_folder_1}/VC_observed.${chrid}.5000.txt
+  java -jar ${juicer_path} dump oe VC PR-LR/data/GSE63525_K562_combined_30.hic ${chrid} ${chrid} BP 5000 ${sv_folder_1}/VC_oe.${chrid}.5000.txt
+  paste ${sv_folder_1}/VC_observed.${chrid}.5000.txt ${sv_folder_1}/VC_oe.${chrid}.5000.txt | awk '{print $1 "\t" $2 "\t" $3 "\t" $6 "\t" $3 / $6}' > ${sv_folder_1}/VC_combined.${chrid}.5000.txt
+  python scripts/calc_pvalue.py ${sv_folder_1}/VC_combined.${chrid}.5000.txt ${sv_folder_2}/${chrid}_K562_prob.5000.txt
+done
 
-path/to/python scripts/calc_pvalue.py path/to/save_folder/VC_combined.${chrid}.5000.txt path/to/save_folder/${chrid}_K562_prob.5000.txt
+
+
+
+
+
+
 
 ```
 3. then generate fragment contact network (FCN) for each chromosome according to procedure:
