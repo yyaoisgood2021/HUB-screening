@@ -43,7 +43,7 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
    # the above commands first used juicer_tools.jar to dump HiC contact map to {sv_folder_1}, using VC normalization, on a resolution of 5000, on each {chrid}
    # oe represents observed/expected values
    # the commands then used calc_pvalue.py to fit a Poisson distribution to derive a p-value for each interaction on each {chrid}
-```
+   ```
 3. then generate fragment contact network (FCN) for each chromosome according to procedure:
 
 	i. run `generate_eligible_coords` for each chr and put the results in `coord_save_folder`
