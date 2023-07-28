@@ -190,3 +190,17 @@
 
 # Expected results
 
+1. [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt) displays the generated outputs in the folder architecture.
+
+2. expected heatmap for TF score vs. km-clusters
+<p align="center">
+  <img  height="800" src="https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/Fig4.4.png">
+</p>
+
+3. expected significant TFs and (TF -> regulatee) edges 
+<p align="center">
+  <img  height="600" src="https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/Fig4.5.png">
+</p>
+
+
+
