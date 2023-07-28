@@ -83,7 +83,12 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
 
 run `FCN_analysis` to repeat analysis in the manuscript
 
-### Section 4 "Entropy analysis for chromatin accessibility"
+### Section 4 "Pseudobulk analysis using Taiji"
+
+to repeat the analysis, following the [steps](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji)
+
+
+### Section 5 "Entropy analysis for chromatin accessibility"
 
 to calculate entropy, you need to prepare `overlapped_data` according to the procedures below: 
 
@@ -113,11 +118,6 @@ format of `coord file`:
     ```bash
     python scripts/calc_entropy_genome1D.py `overlap file save path` `entropy result save path`
     ```
-
-### Section 5 "Pseudobulk analysis using Taiji"
-
-to repeat the analysis, following the [steps](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji)
-
 
 
 
