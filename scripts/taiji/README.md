@@ -192,15 +192,21 @@
 
 1. [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt) displays the generated outputs in the folder architecture.
 
-2. expected heatmap for TF score vs. km-clusters
+2. expected output figures
 <p align="center">
-  <img  height="800" src="https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/Fig4.4.png">
+  <img  height="800" src="https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/Fig5.final.new-1.png">
+</p>
+<p align="center">
+  <img  height="291" src="https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/Fig5.final.new-4.png">
 </p>
 
-3. expected significant TFs and (TF -> regulatee) edges 
-<p align="center">
-  <img  height="600" src="https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/Fig4.5.png">
-</p>
+Figure 5 Single cell RNA-seq and ATAC-seq analysis on the hub deletions
+(A) UMAP visualization plots of the single cells in the scRNA-seq and scATAC-seq experiments. For scRNA-seq, colors and numbers indicate the clusters identified by SNN modularity optimization (Seurat v4.1.0). For scATAC-seq, numbers indicate the clusters anchored to the corresponding clusters in the scRNA-seq analysis. Cells in each cluster were pooled into pseudobulks. As a result, 15 (Essential) and 18 (Nonessential) pseudobulk samples were used as inputs for the Taiji software.  
 
+(B) Heatmap of the Z-scales of the PageRank scores for the TFs, arranged by sample type and K-Means clusters.
+
+(C) Venn diagram shows the transcription factors (TFs) with significantly increased PageRank scores in the Essential (red) or Nonessential (blue) cluster. The TFs were selected using adjusted p <= 0.05 and fold change >= 2 by comparing them with the WT cluster using a Mann-Whitney U test (see Methods). 
+
+(D) Each gray dot in the TF box (red, essential hub deletion; blue, nonessential hub deletion) represents a TF with a higher PageRank score in the hub-deleted cells listed in Figure 5C. Three TFs, BACH1 (essential-specific), JUNB (common) and ZNF787 (nonessential-specific) are representative TFs, and the outgoing edges represent regulatory interactions with their target genes with significantly increased weight (adjusted p-values <= 0.05 and percentile rank difference >= 0.5 by comparing with the WT and the cluster of the opposite essentiality type, see Methods). It is evident that essential-specific TFs regulate a significantly larger number of genes than common or nonessential-specific TFs. 
 
 
