@@ -13,15 +13,17 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
 
 1. To run codes in this section, you need to install [juicer](https://github.com/aidenlab/juicer) (v1.6) and [bedtools](https://bedtools.readthedocs.io/en/latest/index.html).
 
-2. Download the following data and put them in the designated folder `PR-LR/data`, the expected folder tree structure is displayed in [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt):
+2. Gather and format data:
    
-	i. supplementary table `sciadv.abi6020_table_s11.xlsx` from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020)
+	i. Download the supplementary table `sciadv.abi6020_table_s11.xlsx` from [Ding et al. study](https://www.science.org/doi/10.1126/sciadv.abi6020) (DOI: 10.1126/sciadv.abi6020), and put it in the designated folder `PR-LR/data`, the expected folder tree structure is displayed in [folder_tree.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/folder_tree.txt)
 	
- 	ii. Hi-C data (`GSE63525_K562_combined_30.hic`) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
+ 	ii. Download Hi-C data (`GSE63525_K562_combined_30.hic`) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
 
-	iii. download all feature data according to file [download_chip_dt.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/download_chip_dt.txt), then rename the files according to folder_tree.txt. Also download ATAC-seq narrow peak file from ENCODE [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/) (Note ENCFF330SHG and ENCFF976CEI are hg38 and you need to lift them over to hg19)
+	iii. Download all feature data according to file [download_chip_dt.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/download_chip_dt.txt), then rename the files according to folder_tree.txt. Also download ATAC-seq narrow peak file from ENCODE [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/) (Note ENCFF330SHG and ENCFF976CEI are hg38 and you need to lift them over to hg19)
 
-3. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
+	iv. Obtain gene essentiality data from [Wang et al. 2015](https://www.science.org/doi/10.1126/science.aac7041), [Morgen et al. 2016](https://www.nature.com/articles/nbt.3567), and long non-coding RNA essentiality data from [Liu et al. 2018](https://www.nature.com/articles/nbt.4283)  
+
+4. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
 
    ```bash
    juicer_path=path/to/juicer_tools.jar # change this line to the actual path to juicer_tools.jar
@@ -45,7 +47,9 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
    # oe represents observed/expected values
    # the commands then used calc_pvalue.py to fit a Poisson distribution to derive a p-value for each interaction on each {chrid}
    ```
-4. then generate fragment contact network (FCN) for each chromosome according to procedure:
+   File `K562.chr1.res_5000.partial.txt` in the folder [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources) displays the top 5000 lines of the expected output for chr1.
+
+5. then generate fragment contact network (FCN) for each chromosome according to procedure:
 
 	i. run all cells in `generate_eligible_coords.ipynb` for each chr and put the results in `PR-LR/eligible_coordinates`
 
@@ -69,8 +73,7 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
  	python scripts/prep_node_meta.py PR-LR/eligible_coordinates PR-LR/overlap_coords PR-LR/node_meta.0
  	```
  
- 
- 	iii. run `PR` to build FCNs, and perform PR 
+ 	iii. run all cells in `PR.ipynb` to build FCNs, and perform personalized PR. The PR results for all chromosomes will be generated in the folder `PR-LR/PR_scores/proc`. 
 
 	iv. run `LR` to train a LR classifer for hub essentiality (you may want to modify the codes)
 
