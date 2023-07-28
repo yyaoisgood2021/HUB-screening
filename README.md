@@ -19,7 +19,7 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
 	
  	ii. Hi-C data (`GSE63525_K562_combined_30.hic`) from [Rao's work](https://www.cell.com/fulltext/S0092-8674(14)01497-4) (DOI: 10.1016/j.cell.2014.11.021)
 
-	iii. download all data according to file [download_chip_dt.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/download_chip_dt.txt)
+	iii. download all feature data according to file [download_chip_dt.txt](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/download_chip_dt.txt), then rename the files according to folder_tree.txt. Also download ATAC-seq narrow peak file from ENCODE [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/) (Note ENCFF330SHG and ENCFF976CEI are hg38 and you need to lift them over to hg19)
 
 3. then generate the `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
 
@@ -47,16 +47,29 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
    ```
 4. then generate fragment contact network (FCN) for each chromosome according to procedure:
 
-	i. run all cells in `generate_eligible_coords.ipynb` for each chr and put the results in `coord_save_folder`
+	i. run all cells in `generate_eligible_coords.ipynb` for each chr and put the results in `PR-LR/eligible_coordinates`
 
- 	ii. run the following bash commands to generate node_meta, for each chromosome, for each feature
+ 	ii. generate node_meta information using the next two steps:
+
+ 	* overlap eligible_coords with peaks of a feature using bedtools. The following example command implements overlapping of all eligible nodes on chr1 with feature `CTCF.narrow.rep-1.hg19.bed`. Repeat this code for all chromosomes, and for ATAC and all features mentioned in the download_chip_dt.txt (except black-list annotation)
 
 	```bash
-	bedtools intersect -a path/to/eligible_coords.${chrid}.bed -b path/to/{feature}.bed_peak_file -wao > path/to/overlap_save_folder/overlap.{feature}.{chrid}.bed
-
- 	path/to/python scripts/prep_node_meta.py path/to/coord_save_folder path/to/overlap_save_folder path/to/node_meta_save_folder
+	chrid=chr1
+	feature=CTCF.narrow.rep-1 # feature name should be ${feature}.hg19.bed
+	
+	save_folder=PR-LR/overlap_coords
+	mkdir -p ${save_folder}
+	
+	bedtools intersect -a PR-LR/eligible_coordinates/eligible_coordinates.${chrid}.hg19.bed \
+	-b PR-LR/data/${feature}.hg19.bed -wao > ${save_folder}/{feature}.{chrid}.bed
 	```
 
+	* run `scripts/prep_node_meta.py` to summarize all overlapping outputs, save results to `PR-LR/node_meta.0`
+	```bash
+ 	python scripts/prep_node_meta.py PR-LR/eligible_coordinates PR-LR/overlap_coords PR-LR/node_meta.0
+ 	```
+ 
+ 
  	iii. run `PR` to build FCNs, and perform PR 
 
 	iv. run `LR` to train a LR classifer for hub essentiality (you may want to modify the codes)
