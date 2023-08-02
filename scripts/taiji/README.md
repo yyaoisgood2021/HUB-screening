@@ -75,7 +75,7 @@
     results/seurat_RNA/clustered/ess_rna.with_cluster_info.npcs30_pc30.s2.rds \
     results/seurat_RNA/clustered/noness_rna.with_cluster_info.npcs30_pc30.s2.rds \
     results/seurat_ATAC/filtered \
-    ${n_pc} ${n_pc_cls} ${res} \ # replace this line to parameters you choose and delete this comment
+    ${n_pc} ${n_pc_cls} ${res} \ 
     results/seurat_ATAC/clustered
     
     # results/seurat_RNA/clustered/ess_rna.with_cluster_info.npcs30_pc30.s2.rds:
@@ -97,7 +97,7 @@
     Rscript scripts/taiji/mk-psbulk-data.1.R \
     results/seurat_RNA/clustered \
     results/seurat_ATAC/clustered \
-    ${n_pc} ${n_pc_cls} ${res} \ # replace this line to parameters you choose and delete this comment
+    ${n_pc} ${n_pc_cls} ${res} \ 
     results/taiji_datasets \
     results/proc_data/ATAC/ess/outs/fragments.tsv.gz \
     results/proc_data/ATAC/noness/outs/fragments.tsv.gz 
