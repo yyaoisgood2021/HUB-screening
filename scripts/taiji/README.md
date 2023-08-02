@@ -30,17 +30,19 @@
     results/proc_data/RNA/combined/outs/count/filtered_feature_bc_matrix
     # results/seurat_RNA/filtered is the folder to save this command's output.
     # for this and all output_save_folders below, make sure you have already created these folders
-   
+
+    n_pc=30
+    n_pc_cls=30
     Rscript scripts/taiji/mk-indv-rna-clusters.R \
     results/seurat_RNA/filtered/hubs.high_quality.combined.s1.rds \
     results/seurat_RNA/clustered \
-    n_pc n_pc_cls # replace this line to integers you choose
+    ${n_pc} ${n_pc_cls} 
     # results/seurat_RNA/filtered/hubs.high_quality.combined.s1.rds is the seurat object generated from the last step
     # results/seurat_RNA/clustered: save folder for this command
     # n_pc, n_pc_cls: hyperparameters for PCA and single-cell clustering. I'm using 30, 30 in my manuscript
     ```
 
-4. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count) (v7.0.0). If you downloaded the processed data from GEO, you can simply put them in the folder results/proc_data/ATAC and skip this step.
+4. Process scATAC-seq raw sequencing data. Use `cellranger-atac count` with the default parameters following the [10x Genomics instructions](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/count) (v7.0.0). If you downloaded the processed data from GEO, you can simply put them in the folder results/proc_data/ATAC, then you need to prepare an index file by running `tabix -p bed fragments.tsv.gz` in the folder results/proc_data/ATAC, then you can skip this step.
 
     ```bash
     cellranger-atac count --id=ess \
@@ -66,11 +68,14 @@
 6. Generate pseudobulk clusters of single cells for Taiji inputs. Briefly, you need to integrate scATAC onto the scRNA experiments, and then extract and sum the gene counts and ATAC fragments for the single cells from the respective pseudobulk clusters. You can achieve this by sequentially running `scripts/taiji/mk-psbulk-data.0.R` and then `scripts/taiji/mk-psbulk-data.1.R`. All hyperparameters used can be found in the scripts.
 
     ```bash
+    n_pc=30
+    n_pc_cls=30
+    res=3
     Rscript scripts/taiji/mk-psbulk-data.0.R \
     results/seurat_RNA/clustered/ess_rna.with_cluster_info.npcs30_pc30.s2.rds \
     results/seurat_RNA/clustered/noness_rna.with_cluster_info.npcs30_pc30.s2.rds \
     results/seurat_ATAC/filtered \
-    n_pc n_pc_cls res \ # replace this line to parameters you choose and delete this comment
+    ${n_pc} ${n_pc_cls} ${res} \ # replace this line to parameters you choose and delete this comment
     results/seurat_ATAC/clustered
     
     # results/seurat_RNA/clustered/ess_rna.with_cluster_info.npcs30_pc30.s2.rds:
@@ -86,10 +91,13 @@
    Run the following codes to prepare data:
 
     ```bash
+    n_pc=30
+    n_pc_cls=30
+    res=3
     Rscript scripts/taiji/mk-psbulk-data.1.R \
     results/seurat_RNA/clustered \
     results/seurat_ATAC/clustered \
-    n_pc n_pc_cls res \ # replace this line to parameters you choose and delete this comment
+    ${n_pc} ${n_pc_cls} ${res} \ # replace this line to parameters you choose and delete this comment
     results/taiji_datasets \
     results/proc_data/ATAC/ess/outs/fragments.tsv.gz \
     results/proc_data/ATAC/noness/outs/fragments.tsv.gz 
