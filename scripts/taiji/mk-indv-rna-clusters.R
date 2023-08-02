@@ -38,8 +38,8 @@ cds <- readRDS(seurat_obj_path)
 avail_genes <- rownames(cds)
 MT_genes <- avail_genes[grepl('^MT-', avail_genes)]
 remain_genes <- avail_genes [! (avail_genes %in% MT_genes)]
-# sce <- cds[remain_genes, ]
-sce <- cds
+sce <- cds[remain_genes, ]
+
 
 # consider ess and noness datasets individually
 
