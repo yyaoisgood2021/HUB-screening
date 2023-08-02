@@ -34,7 +34,7 @@
     Rscript scripts/taiji/mk-indv-rna-clusters.R \
     results/seurat_RNA/filtered/hubs.high_quality.combined.s1.rds \
     results/seurat_RNA/clustered \
-    n_pc n_pc_cls 
+    n_pc n_pc_cls # replace this line to integers you choose
     # results/seurat_RNA/filtered/hubs.high_quality.combined.s1.rds is the seurat object generated from the last step
     # results/seurat_RNA/clustered: save folder for this command
     # n_pc, n_pc_cls: hyperparameters for PCA and single-cell clustering. I'm using 30, 30 in my manuscript
