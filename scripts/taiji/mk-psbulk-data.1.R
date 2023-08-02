@@ -170,8 +170,6 @@ extract_psbulk_data_for_cls_i <- function(i, rna_ds, atac_ds, atac_mat, cls_info
   cell_barcodes <- atac_ds@meta.data %>% dplyr::filter(predicted.id==i) %>% row.names
 
 
-
-
   atac_mat_i <- atac_mat %>% data.frame %>% dplyr::filter(V4 %in% cell_barcodes)
   result_count <- c()
   atac_mat_i <- atac_mat_i %>% mutate(str_to_write = paste(V1,V2,V3,sep='\t')) %>% 
@@ -179,9 +177,11 @@ extract_psbulk_data_for_cls_i <- function(i, rna_ds, atac_ds, atac_mat, cls_info
   atac_mat_i <- atac_mat_i %>% group_by(str_to_write) %>% summarize(s = sum(V5))
   atac_mat_i <- atac_mat_i %>% ungroup %>% as.data.frame
 
+
+  
   # write sv_file_path_count
   if (if_save_data) {
-  sv_file_path <- paste0(this_cls,'.atac-fragments.bed')
+  sv_file_path <- paste0(ds_type,'-',i,'.atac-fragments.bed')
   sv_file_path_count <- file.path(data_save_folder, sv_file_path)
   write.table(atac_mat_i$str_to_write, sv_file_path_count, quote=F, col.names=F, row.names=F)
   while (nrow(atac_mat_i) > 0) {
