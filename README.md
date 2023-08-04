@@ -81,7 +81,7 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
 
 ### Section 3 "Simple path analysis on the hub pairs"
 
-run `FCN_analysis` to repeat analysis in the manuscript
+run all cells in `FCN_analysis.ipynb` to repeat analysis in the manuscript
 
 ### Section 4 "Pseudobulk analysis using Taiji"
 
