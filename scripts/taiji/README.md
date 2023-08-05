@@ -134,7 +134,10 @@
      --quantMode GeneCounts
      ```
      
-     iii. STAR will generate a lot of files and you can see `{prefix}-ReadsPerGene.out.tab`, convert gene_id to gene_short_name (gene symbol) in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41)
+     iii. STAR will generate a lot of files and you can see `{prefix}-ReadsPerGene.out.tab`, convert gene_id to gene_short_name (gene symbol) in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41), the example codes to implement this conversion on ENCSR000AEM is shown below:
+     ```bash
+
+     ```
      
      iv. sum up all the results and save it as `results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt`. There's no need to normalize.
 
