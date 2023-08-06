@@ -119,7 +119,9 @@
      i. download raw fastq data [ENCSR637VLS](https://www.encodeproject.org/experiments/ENCSR637VLS/) (single-end, all other files are paired-end), and [ENCSR000CPH](https://www.encodeproject.org/experiments/ENCSR000CPH/), [ENCSR000AEM](https://www.encodeproject.org/experiments/ENCSR000AEM/), and [ENCSR000AEO](https://www.encodeproject.org/experiments/ENCSR000AEO/)
 
      ii. align with [STAR](https://github.com/alexdobin/STAR) (2.7.10a) according to the manual. Use the GRCh38 assembly.
-     An example script for running STAR aligner on the first replicate data of ENCSR000AEM is shown below. repeat the codes below for all other replicates and for all other accessions.
+     An example script for running STAR aligner on the first replicate data of ENCSR000AEM is shown below.
+
+     * repeat the codes below for all other replicates and for all other accessions.
      ```bash
      path_to_index_folder='add_hg38_genome_index_here'
 
@@ -136,19 +138,30 @@
      --quantMode GeneCounts
      ```
      
-     iii. STAR will generate a lot of files and you can see `{prefix}-q30-ReadsPerGene.out.tab`, convert gene_id to gene_short_name (gene symbol) in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41), the example codes to implement this conversion on ENCSR000AEM is shown below:
+     iii. STAR will generate a lot of files and you can see `{prefix}-q30-ReadsPerGene.out.tab`, convert gene_id (first column) to gene_short_name (gene symbol) in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41), the example codes to implement this conversion on the first replicate data of ENCSR000AEM is shown below.
+  
+     * repeat the codes below for all other replicates and for all other accessions. 
      ```bash
-     gencode_file_path='add_gencode_path_here'
+     gencode_file_path='add_gencode_gtf_path_here' 
      prefix_in_this_example='rep1'
 
      work_folder=results/proc_data/RNA/WT/ENCSR000AEM
      data_to_transfer_path=${work_folder}/${prefix_in_this_example}-q30-ReadsPerGene.out.tab
      data_to_save_path=${work_folder}/${prefix_in_this_example}-q30-ReadsPerGene.name_converted.txt
-     python scripts/taiji/convert_gene_short_names.py ${gencode_file_path} ${data_to_transfer_path} ${data_to_save_path}
-     
+     python scripts/taiji/convert_gene_short_names.py ${gencode_file_path} ${data_to_transfer_path} ${data_to_save_path}     
      ```
      
      iv. sum up all the results and save it as `results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt`. There's no need to normalize.
+
+     ```bash
+     python scripts/taiji/sum_gene_counts.py \
+     results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt \
+     results/proc_data/RNA/WT/ENCSR000AEM/rep1-q30-ReadsPerGene.name_converted.txt \
+     results/proc_data/RNA/WT/ENCSR000AEM/rep2-q30-ReadsPerGene.name_converted.txt \
+     # add all gene count files generated from the prevous steps
+     ```
+
+     
 
 8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` and `input.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/). You must change the paths in the `config.yml` manually, then you can save the file with correct paths to `results/taiji_commands/config.yml`. Run the following command to generate `results/taiji_commands/input.yml`. More explanations can be found in the [scripts](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji/prep_input_config.py).
    ```bash
