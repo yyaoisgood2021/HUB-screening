@@ -166,7 +166,7 @@
 
      # in this step, you need to run scripts/taiji/sum_gene_counts.py to sum over all (format changed) gene count files generated from the last steps
      # the first argument is a reference from results/taiji_datasets/npcs30_pc30.3. the purpose of adding this reference is to keep the gene set the same.
-     # you can use any file in this folder. if your selected Npcs parameters are different, you should change the folder name accordingly.
+     # you can use any rna-expr-pscounts.txt file in this folder. if your selected Npcs parameters are different, you should change the folder name accordingly.
      # the second argument is the save path for the output of this command
      # then you add the paths to all gene count files, separate them with `space`
      ```
