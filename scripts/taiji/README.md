@@ -119,10 +119,12 @@
      i. download raw fastq data [ENCSR637VLS](https://www.encodeproject.org/experiments/ENCSR637VLS/) (single-end, all other files are paired-end), and [ENCSR000CPH](https://www.encodeproject.org/experiments/ENCSR000CPH/), [ENCSR000AEM](https://www.encodeproject.org/experiments/ENCSR000AEM/), and [ENCSR000AEO](https://www.encodeproject.org/experiments/ENCSR000AEO/)
 
      ii. align with [STAR](https://github.com/alexdobin/STAR) (2.7.10a) according to the manual. Use the GRCh38 assembly.
-     An example script for running STAR aligner on ENCSR000AEM is shown below. repeat the codes below for other replicates and experiments.
+     An example script for running STAR aligner on the first replicate data of ENCSR000AEM is shown below. repeat the codes below for all other replicates and for all other accessions.
      ```bash
+     path_to_index_folder='add_hg38_genome_index_here'
+
      out_dir=results/proc_data/WT/ENCSR000AEM
-     STAR --genomeDir /stg3/data3/peiyao/HUBS/pair_can/WT_bulk/hg38_index \
+     STAR --genomeDir ${path_to_index_folder} \
      --runThreadN 6 \
      --runMode alignReads \
      --readFilesIn results/data/RNA/WT/ENCSR000AEM/ENCFF001RED.fastq results/data/RNA/WT/ENCSR000AEM/ENCFF001RDZ.fastq \
@@ -134,9 +136,16 @@
      --quantMode GeneCounts
      ```
      
-     iii. STAR will generate a lot of files and you can see `{prefix}-ReadsPerGene.out.tab`, convert gene_id to gene_short_name (gene symbol) in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41), the example codes to implement this conversion on ENCSR000AEM is shown below:
+     iii. STAR will generate a lot of files and you can see `{prefix}-q30-ReadsPerGene.out.tab`, convert gene_id to gene_short_name (gene symbol) in accordance with the outputs of 10x, use [gencode.annotation.gtf](https://www.gencodegenes.org/human/release_41.html) (v41), the example codes to implement this conversion on ENCSR000AEM is shown below:
      ```bash
+     gencode_file_path='add_gencode_path_here'
+     prefix_in_this_example='rep1'
 
+     work_folder=results/proc_data/RNA/WT/ENCSR000AEM
+     data_to_transfer_path=${work_folder}/${prefix_in_this_example}-q30-ReadsPerGene.out.tab
+     data_to_save_path=${work_folder}/${prefix_in_this_example}-q30-ReadsPerGene.name_converted.txt
+     python scripts/taiji/convert_gene_short_names.py ${gencode_file_path} ${data_to_transfer_path} ${data_to_save_path}
+     
      ```
      
      iv. sum up all the results and save it as `results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt`. There's no need to normalize.
