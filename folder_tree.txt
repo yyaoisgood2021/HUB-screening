@@ -12,8 +12,10 @@ HUB-screening folder tree
 |    +----ext_0.rep_2
 |    |    Ep_200-val_loss_0.02.hdf5
 |    |    hub_PC30.1st.withGC.1.txt
+|    |    hub_PC30.2nd.0.txt
 |    |    random_seeds.txt
 |    all_hubs.txt
+|    all_hubs.for_LR.txt
 |    TableS4.hub_screening_results.xlsx
 |    TableS12.data-source.xlsx
 |    download_chip_dt.txt
@@ -25,6 +27,24 @@ HUB-screening folder tree
 +----scripts
 |    +----taiji
 |    |    README.md
+|    |    filter_cells.R
+|    |    filter_cells_atac.R
+|    |    mk-indv-rna-clusters.R
+|    |    mk-psbulk-data.0.R
+|    |    mk-psbulk-data.1.R
+|    |    post_taiji_analysis.0.R
+|    |    prepare_edges.1.R
+|    |    weight_changed_edges.2.R
+|    |    fing_changed_edges_ks.3.py
+|    |    prep_input_config.py
+|    CNN-AE-LR.ipynb
+|    calc_pvalue.py
+|    generate_eligible_coords.ipynb
+|    prep_node_meta.py
+|    PR.ipynb
+|    LR.ipynb
+|    FCN_analysis.ipynb
+
 LICENSE.md
 README.md
 folder_tree.txt
@@ -295,5 +315,6 @@ folder_tree.txt
 |    |    +----proc
 |    |    |    result.chr1.1.txt
 
++----FCN
 
 
