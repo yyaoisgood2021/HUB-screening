@@ -71,6 +71,7 @@ slice_input += (' '*6 + '- rep: 1\n')
 slice_input += (' '*8 + 'files:\n')
 slice_input += (' '*10 + '- path: {}\n'.format(wt_atac_path))     
 slice_input += (' '*12 + 'format: NarrowPeak\n')
+input_dt += slice_input
 # add sample atac data
 for clsid in meta_df['cluster_id']:
     cls_type, cls_number = clsid.split('-')
