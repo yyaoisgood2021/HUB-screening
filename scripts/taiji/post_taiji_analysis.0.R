@@ -108,7 +108,7 @@ for (i in (pr_all %>% colnames)) {
     } else {
       # noness type
       rep_i <- 'orig'}
-    meta_df_this <- meta_df %>% filter(id==type_i & cls==seurat_cls_i)
+    meta_df_this <- meta_df %>% dplyr::filter(id==type_i & cls==seurat_cls_i)
     meta_df_new[nrow(meta_df_new)+1, ] <- c(i, type_i, seurat_cls_i, rep_i, 
                             meta_df_this$rna.number%>%as.integer, 
                             meta_df_this$atac.number%>%as.integer)
@@ -193,7 +193,7 @@ dev.off()
 # save pca
 saveRDS(pca, file.path(save_folder_base, "pca_dataset.rds"))
 
-pca <- readRDS(file.path(fig_save_folder, "pca_dataset.rds"))
+pca <- readRDS(file.path(save_folder_base, "pca_dataset.rds"))
 
 
 ######################################## 
