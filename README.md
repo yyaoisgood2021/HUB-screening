@@ -171,11 +171,16 @@ to calculate entropy, you need to prepare `overlapped_data` according to the pro
    to repeat results in the manuscript, you need to load all data from all pseudobulk clusters and normalize them, run the following codes
 
    ```bash
-   python 
-	
+   overlap_result_save_folder="entropy/overlap_results.hg19"
+   overlap_result_file_base="overlap" # modify this line or the python code accordingly
+   result_save_folder="entropy/results" # path to the folder to save output of this code
+   meta_df_path="results/taiji_results_analysis/cls-5.rep-0/meta_df.2.txt" # modify this line according to your Taiji results
 
-
-   
+   python scripts/calc_entropy_1D.all_psbulk_cluster.py \
+   ${overlap_result_save_folder} \
+   ${result_save_folder} \
+   ${meta_df_path} \
+   ${overlap_result_file_base}
    ```
    repeat the codes for each chr
    
