@@ -112,16 +112,21 @@ to calculate entropy, you need to prepare `overlapped_data` according to the pro
 
    ```bash
    data_folder=results/taiji_datasets/npcs30_pc30.3
-   save_folder=`enter save folder here`
+   save_folder_hg38=`enter save folder here`
+   save_folder_hg19=`enter save folder here`
+   
    fname="ess-0.atac-fragments.bed" # iterate through all files, without gz suffix
 
-   mkdir -p ${save_folder}
-   cp ${data_folder}/${fname}.gz ${save_folder}
-   gunzip ${save_folder}/${fname}.gz
-   awk '{ print $1 "\t" $2 "\t" $3 "\t1"}' ${save_folder}/${fname} > ${save_folder}/${fname}graph
+   mkdir -p ${save_folder_hg38}
+   mkdir -p ${save_folder_hg19}
+   cp ${data_folder}/${fname}.gz ${save_folder_hg38}
+   gunzip ${save_folder_hg38}/${fname}.gz
+   awk '{ print $1 "\t" $2 "\t" $3 "\t1"}' ${save_folder_hg38}/${fname} > ${save_folder_hg38}/${fname}graph
+
+   liftOver ${save_folder_hg38}/${fname}graph hg38ToHg19.over.chain ${save_folder_hg19}/${fname}graph $save_folder_hg19/${fname}.unMapped
    ```
    
-3. prepare a `coord file` for your genomic loci of interest
+2. prepare a `coord file` for your genomic loci of interest
 
    in the format of `coord file`: three-column bed file of equal-sized (resolution) bins with no overlaps, I typically remove (1) centromere gaps, (2) black-list annotated regions, and (3) telomere regions
 
@@ -135,7 +140,7 @@ to calculate entropy, you need to prepare `overlapped_data` according to the pro
 
    can directly use results saved in the folder `PR-LR/eligible_coordinates` if you have run Section 2
 
-4. run `bedtools intersect` to map your signals to each genomic bin with the command:
+3. run `bedtools intersect` to map your signals to each genomic bin with the command:
    ```bash
    coord_file=`enter path to coord file here` # iterate through all chromosomes in the folder
    bedgraph_file=`enter path to bedgraph file here` # iterate through all files in the bedgraph save folder
@@ -143,17 +148,24 @@ to calculate entropy, you need to prepare `overlapped_data` according to the pro
    save_fname=`enter name of the output overlap results`
 
    mkdir -p ${save_folder}
-   bedtools intersect -wao -a ${coord_file} -b ${bedgraph_file} > ${save_folder}/{save_fname}
+   bedtools intersect -wao -a ${coord_file} -b ${bedgraph_file} > ${save_folder}/{save_fname} # make sure all coordinates are under the same assembly hg19
    ```
 
-   you will get a file of the overlapped results, and it should have 8 columns
+   you will get a file for the overlapped results, and it should have 8 columns
 
    repeat the above codes for all chr and for all pseudobulk-specific ATAC-fragment bedgraphs
 
-5. run `calc_entropy_genome1D.py` with the following command:
+4. for general purpose, run `calc_entropy_genome1D.py` with the following command to compute entropy:
    ```bash
-   python scripts/calc_entropy_genome1D.py `overlap file save path` `entropy result save path`
+   result_sv_path=`enter path to a .txt file`
+   python scripts/calc_entropy_genome1D.py ${save_folder}/{save_fname} ${result_sv_path}
    ```
+
+   to repeat results in the manuscript, you need to load all data from all chr and normalize them, run the following codes:
+   ```bash
+
+   ```
+   
 
 
 
