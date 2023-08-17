@@ -138,17 +138,23 @@ to calculate entropy, you need to prepare `overlapped_data` according to the pro
 
    chr4 15000 20000
 
-   can directly use results saved in the folder `PR-LR/eligible_coordinates` if you have run Section 2
+   you can directly use results saved in the folder `PR-LR/eligible_coordinates` if you have run Section 2, just copy them to the folder `entropy/eligible_coords.hg19`
 
 3. run `bedtools intersect` to map your signals to each genomic bin with the command:
    ```bash
-   coord_file=`enter path to coord file here` # iterate through all chromosomes in the folder
-   bedgraph_file=`enter path to bedgraph file here` # iterate through all files in the bedgraph save folder
-   save_folder=`enter path to save folder here`
-   save_fname=`enter name of the output overlap results`
+   # this block shows an example of overlapping 'ess-0' sample's chr1
+
+   chrid=chr1 # enter chrid here, iterate through all chromosomes in the folder
+   psbulk_sample="ess-0" # enter sample id here according to meta df generated in the Taiji part, iterate through all samples in the folder, skip WT
+   
+   coord_file=entropy/eligible_coords.hg19/eligible_coordinates.${chrid}.hg19.bed 
+   bedgraph_file=entropy/feature_bedgraphs.hg19/${psbulk_sample}.atac-fragments.bedgraph 
+   save_folder=entropy/overlap_results.hg19
+   save_fname_base="overlap"
 
    mkdir -p ${save_folder}
-   bedtools intersect -wao -a ${coord_file} -b ${bedgraph_file} > ${save_folder}/{save_fname} # make sure all coordinates are under the same assembly hg19
+   bedtools intersect -wao -a ${coord_file} -b ${bedgraph_file} > \
+   ${save_folder}/${save_fname_base}.${chrid}.${psbulk_sample}.txt # make sure all coordinates are under the same assembly hg19
    ```
 
    you will get a file for the overlapped results, and it should have 8 columns
@@ -157,14 +163,21 @@ to calculate entropy, you need to prepare `overlapped_data` according to the pro
 
 4. for general purpose, run `calc_entropy_genome1D.py` with the following command to compute entropy:
    ```bash
+   overlap_data_path=`enter the path to previous step's output: the overlapping results`
    result_sv_path=`enter path to a .txt file`
-   python scripts/calc_entropy_genome1D.py ${save_folder}/{save_fname} ${result_sv_path}
+   python scripts/calc_entropy_genome1D.py ${overlap_data_path} ${result_sv_path}
    ```
 
-   to repeat results in the manuscript, you need to load all data from all chr and normalize them, run the following codes:
+   to repeat results in the manuscript, you need to load all data from all pseudobulk clusters and normalize them, run the following codes
+
    ```bash
+   python 
+	
 
+
+   
    ```
+   repeat the codes for each chr
    
 
 
