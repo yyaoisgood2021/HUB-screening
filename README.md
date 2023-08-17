@@ -93,20 +93,30 @@ to repeat the analysis, following the [steps](https://github.com/yyaoisgood2021/
 to calculate entropy, you need to prepare `overlapped_data` according to the procedures below: 
 
 1. prepare a `bedgraph file` for your signal (experiment)
-format of `bedgraph file`: 
-    four-column bed file with chrid, start, end, signal_value (intensity, for read count file, this column is universally 1)
+
+   in the format of `bedgraph`: four-column bed file with chrid, start, end, signal_value (intensity. for ATAC-seq read count files, this column is universally 1)
+    
     chr1 10000 10015 20
+   
     chr1 10008 10025 27
-    ...
-    chr4 10234 10270 15
+
+   ...
+
+   chr4 10234 10270 15
 
 2. prepare a `coord file` for your genomic loci of interest
-format of `coord file`: 
-    three-column bed file of equal-sized (resolution) bins with no overlaps, I typically remove centromere and telomere regions
-    chr1 10000 15000 
-    chr1 15000 20000 
-    ...
-    chr4 15000 20000 
+
+   in the format of `coord file`: three-column bed file of equal-sized (resolution) bins with no overlaps, I typically remove (1) centromere gaps, (2) black-list annotated regions, and (3) telomere regions
+
+   chr1 10000 15000 
+
+   chr1 15000 20000 
+
+   ...
+
+   chr4 15000 20000
+
+   can directly use results saved in the folder `PR-LR/eligible_coordinates` if you have run Section 2
 
 3. run bedtools intersect to map your signals to each genomic bin with the command:
     ```bash
