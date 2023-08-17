@@ -317,4 +317,10 @@ folder_tree.txt
 
 +----FCN
 
-
++----entropy
+|    +----feature_bedgraphs
+|    +----feature_bedgraphs.hg19
+|    +----eligible_coords.hg19
+|    +----overlap_results.hg19
+|    +----results
+|    |    atac_entropy.result.intensity.txt
