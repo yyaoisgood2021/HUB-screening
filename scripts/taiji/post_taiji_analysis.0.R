@@ -710,7 +710,7 @@ mean_background_histroy <- c()
 mwu_pval_histroy <- c()
 TFs_histroy <- c()
 mwu_test_strategies_histroy <- c()
-all.pageranks.norm <- all.pageranks %>% normalize # original pr score to normalize -> 0~1, then mwu test
+all.pageranks.norm <- all.pageranks %>% heatmaply::normalize # original pr score to normalize -> 0~1, then mwu test
 
 ess_km.cls <- c(4) %>% as.character
 noness_km.cls <- c(3) %>% as.character
