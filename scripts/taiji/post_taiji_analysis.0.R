@@ -26,7 +26,7 @@ library(Seurat)
 library(Signac)
 library(EnsDb.Hsapiens.v86)
 library(ggplot2)
-
+library(tibble)
 
 
 ########################################
