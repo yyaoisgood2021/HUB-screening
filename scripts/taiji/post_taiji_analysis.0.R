@@ -844,13 +844,13 @@ tf_stats.all <- read.csv(file.path(save_folder_K,'TF_results',
                          header=T, row.names=1)
 # filter TF stats
 FC_thresh <- 2
-tf_stats.sig_TFs <- tf_stats.all %>% filter(pval.adjust < 0.05 & FC > FC_thresh & background == 'WT')
+tf_stats.sig_TFs <- tf_stats.all %>% dplyr::filter(pval.adjust < 0.05 & FC > FC_thresh & background == 'WT')
 write.csv(data.frame(tf_stats.sig_TFs), 
           file.path(save_folder_K,'TF_results',
                     paste0('tf_stats.all.2.sig_TFs.FC-',FC_thresh,'.csv')),
           quote=F)
 
-tf_stats.sig_TFs.down <- tf_stats.all %>% filter(pval.adjust < 0.05 & FC < 1/FC_thresh & background == 'WT')
+tf_stats.sig_TFs.down <- tf_stats.all %>% dplyr::filter(pval.adjust < 0.05 & FC < 1/FC_thresh & background == 'WT')
 write.csv(data.frame(tf_stats.sig_TFs.down), 
           file.path(save_folder_K,'TF_results',
                     paste0('tf_stats.all.2.sig_TFs.down.FC-',FC_thresh,'.csv')),
