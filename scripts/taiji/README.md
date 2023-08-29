@@ -113,7 +113,7 @@
    
 7. Also preprae gene count tsv file and ATAC narrow-peak bed file for the K562 WT control. Download these data from ENCODE
    
-   * ATAC peaks: [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/), directly download the bed narrow peak file in the GRCh38 assembly and save to `results/proc_data/ATAC/WT/ENCFF976CEI.bed`. Also download replicate from [ENCFF117MSK](https://www.encodeproject.org/files/ENCFF117MSK/)
+   * ATAC peaks: [ENCFF976CEI](https://www.encodeproject.org/files/ENCFF976CEI/), directly download the bed narrow peak file in the GRCh38 assembly and save to `results/proc_data/ATAC/WT/ENCFF976CEI.bed`. Also download the replicate file from [ENCFF117MSK](https://www.encodeproject.org/files/ENCFF117MSK/)
    * RNA counts:
      
      i. download raw fastq data [ENCSR637VLS](https://www.encodeproject.org/experiments/ENCSR637VLS/) (single-end, all other files are paired-end), and [ENCSR000CPH](https://www.encodeproject.org/experiments/ENCSR000CPH/), [ENCSR000AEM](https://www.encodeproject.org/experiments/ENCSR000AEM/), and [ENCSR000AEO](https://www.encodeproject.org/experiments/ENCSR000AEO/)
@@ -178,12 +178,13 @@
    python scripts/taiji/prep_input_config.py \
    results/taiji_datasets/npcs30_pc30.3/cls-info-remained.txt \
    results/proc_data/RNA/WT.combined/WT.rna-expr-pscounts.txt \
+   results/proc_data/ATAC/WT/ENCFF117MSK.bed \
    results/proc_data/ATAC/WT/ENCFF976CEI.bed \
    results/taiji_datasets/npcs30_pc30.3 \
    /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt \
    results/taiji_commands/input.yml
    
-   # results/taiji_datasets/npcs30_pc30.3h: the path to the folder that you saved the extracted rna and atac data for the sample Ess and Noness libraries. remove the "/" in the end of the string
+   # results/taiji_datasets/npcs30_pc30.3: the path to the folder that you saved the extracted rna and atac data for the sample Ess and Noness libraries. remove the "/" in the end of the string
    # /stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt: this is the path to the Epitensor results, we use it to impute Hi-C contacts, you can copy this file to your local folder and modify this line
    # path to save the results
    ```
