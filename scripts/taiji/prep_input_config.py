@@ -13,10 +13,11 @@ import sys, os
 
 meta_df_path = sys.argv[1]
 wt_rna_path = sys.argv[2]
-wt_atac_path = sys.argv[3]
-sample_rna_atac_folder_path = sys.argv[4]
-epitensor_result_path = sys.argv[5]
-write_path = sys.argv[6]
+wt_atac_rep1_path = sys.argv[3]
+wt_atac_rep2_path = sys.argv[4]
+sample_rna_atac_folder_path = sys.argv[5]
+epitensor_result_path = sys.argv[6]
+write_path = sys.argv[7]
 
 
 #%% MODIFY THIS BLOCK
@@ -69,9 +70,14 @@ slice_input += (' '*4 + 'group: WT\n')
 slice_input += (' '*4 + 'replicates:\n')
 slice_input += (' '*6 + '- rep: 1\n')
 slice_input += (' '*8 + 'files:\n')
-slice_input += (' '*10 + '- path: {}\n'.format(wt_atac_path))     
+slice_input += (' '*10 + '- path: {}\n'.format(wt_atac_rep1_path))     
+slice_input += (' '*12 + 'format: NarrowPeak\n')
+slice_input += (' '*6 + '- rep: 2\n')
+slice_input += (' '*8 + 'files:\n')
+slice_input += (' '*10 + '- path: {}\n'.format(wt_atac_rep2_path))     
 slice_input += (' '*12 + 'format: NarrowPeak\n')
 input_dt += slice_input
+
 # add sample atac data
 for clsid in meta_df['cluster_id']:
     cls_type, cls_number = clsid.split('-')
