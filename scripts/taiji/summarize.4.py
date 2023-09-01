@@ -10,6 +10,10 @@ this script find the variable edges for a given TF
 @author: peiyaowu
 """
 
+
+#%% pval correct
+from __future__ import division
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -17,8 +21,6 @@ import os, sys
 
 from scipy.stats import kruskal
 
-#%% pval correct
-from __future__ import division
 
 def pminf(array):
     x = 1
