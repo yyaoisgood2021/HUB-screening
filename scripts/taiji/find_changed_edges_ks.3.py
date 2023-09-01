@@ -42,7 +42,7 @@ def split_list_kmcls(lst, meta_df):
     return splitted_lst
 
 
-tf_id = int(sys.argv[1])
+tf_id = int(sys.argv[1])-1
 base_folder = sys.argv[2]
 
 TF_of_interest = pd.read_csv(os.path.join(base_folder, 'Network_info', 'step1.filtered_edges.TF', 'TF_of_interest.txt'), header=None)
