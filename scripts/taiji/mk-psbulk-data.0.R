@@ -230,7 +230,7 @@ N2.atac_remain <- analyze_gene_activity_atac(
 N7.atac_remain <- analyze_gene_activity_atac(
   atac_ds = N7.atac_remain, 
   rna_ds = sce_noness,
-  sample_id = 'N7', 
+  sample_id = 'noness', 
   ds_save_folder = '', 
   ds_save_folder_2 = sv_folder,
   gene_set = 'variable',
