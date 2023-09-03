@@ -125,7 +125,7 @@
      ```bash
      path_to_index_folder='add_hg38_genome_index_here'
 
-     out_dir=results/proc_data/WT/ENCSR000AEM
+     out_dir=results/proc_data/RNA/WT/ENCSR000AEM
      STAR --genomeDir ${path_to_index_folder} \
      --runThreadN 6 \
      --runMode alignReads \
