@@ -25,7 +25,9 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
 
 	v. Also extract the genomic coordinates of all genes from gencode (hg19) and save to `PR-LR/data`.
 
-3. then generate `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
+	* When extracting the genomic coordinates, use the coordinates under the `gene` type in the feature column. if there're multiple gene sites, you should keep all of them.
+
+4. then generate `{chrid}_K562_prob.5000.txt` file for each chromosome using the following bash commands
 
    ```bash
    juicer_path=path/to/juicer_tools.jar # change this line to the actual path to juicer_tools.jar
@@ -51,7 +53,7 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
    ```
    File `K562.chr1.res_5000.partial.txt` in the folder [resources](https://github.com/yyaoisgood2021/HUB-screening/tree/main/resources) displays the top 5000 lines of the expected output for chr1.
 
-4. Generate fragment contact network (FCN) for each chromosome according to procedure:
+5. Generate fragment contact network (FCN) for each chromosome according to procedure:
 
 	i. run all cells in `generate_eligible_coords.ipynb` for each chr and put the results in `PR-LR/eligible_coordinates`
 
@@ -75,9 +77,9 @@ Then, you can run codes in scripts/CNN-AE-LR.ipynb
  	python scripts/prep_node_meta.py PR-LR/eligible_coordinates PR-LR/overlap_coords PR-LR/node_meta.0
  	```
  
-5. run all cells in `PR.ipynb` to build FCNs, and perform personalized PR. The PR results for all chromosomes will be generated in the folder `PR-LR/PR_scores/proc`. 
+6. run all cells in `PR.ipynb` to build FCNs, and perform personalized PR. The PR results for all chromosomes will be generated in the folder `PR-LR/PR_scores/proc`. 
 
-6. run all cells in `LR.ipynb` to train a LR classifer for hub essentiality. 
+7. run all cells in `LR.ipynb` to train a LR classifer for hub essentiality. 
 
 ### Section 3 "Simple path analysis on the hub pairs"
 
