@@ -99,7 +99,7 @@ for j, (sample_type,kmclstype) in enumerate(sample_type_dict.items()):
 
     result_df.iloc[j, :2] = [sample_type, str(kmclstype)]
     
-    dt_all = calc_entropy_psbulk_1(ssample_type, dt_folder, chrid_list, overlap_file_base)
+    dt_all = calc_entropy_psbulk_1(sample_type, dt_folder, chrid_list, overlap_file_base)
     entropy_list = calc_entropy_psbulk_2(dt_all, chrid_list)
 
     result_df.iloc[j, 2:27] = entropy_list
