@@ -171,9 +171,9 @@
      # then you add the paths to all gene count files, separate them with `space`
      ```
 
-     
+8. Prepare chromatin 3D interaction files. In this study, we used the top 10 percent of promoter-enhancer loops identified by [EpiTensor](http://wanglab.ucsd.edu/star/EpiTensor/). Run EpiTensor according to its manual and select the top 10 percent of interactions. The processed data can be found in Wang lab's server `/stg3/data1/nas-0-0.bak/share/epi_universal/human/epitensor_loop_top10p_87311.txt`
 
-8. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` and `input.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/). You must change the paths in the `config.yml` manually, then you can save the file with correct paths to `results/taiji_commands/config.yml`. Run the following command to generate `results/taiji_commands/input.yml`. More explanations can be found in the [scripts](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji/prep_input_config.py).
+9. Prepare the `config.yml` and `input.yml` files based on the actual paths that you have. An example of `config.yml` and `input.yml` can be found in [resources](https://github.com/yyaoisgood2021/HUB-screening/blob/main/resources/taiji/). You must change the paths in the `config.yml` manually, then you can save the file with correct paths to `results/taiji_commands/config.yml`. Run the following command to generate `results/taiji_commands/input.yml`. More explanations can be found in the [scripts](https://github.com/yyaoisgood2021/HUB-screening/blob/main/scripts/taiji/prep_input_config.py).
    ```bash
    python scripts/taiji/prep_input_config.py \
    results/taiji_datasets/npcs30_pc30.3/cls-info-remained.txt \
@@ -189,7 +189,7 @@
    # path to save the results
    ```
    
-9. Run Taiji following the [instruction](https://taiji-pipeline.github.io/).
+10. Run Taiji following the [instruction](https://taiji-pipeline.github.io/).
     ```bash
     ml load taiji
     progress_folder=results/taiji_progresses # this folder save the progresses so you can resume job
@@ -202,7 +202,7 @@
     # I'd recommend put taiji outputs to "results/taiji_results", you can modify this in the config.yml
     ```
 
-10. After you got the Taiji results, perform PCA and K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` first to generate K-Means clusters and to identify top transcription factors (TFs). Lists of the significantly-changed TFs will be generated in the folder `results/taiji_results_analysis/cls-5.rep-0/TF_results` 
+11. After you got the Taiji results, perform PCA and K-Means analysis. Run `scripts/taiji/post_taiji_analysis.0.R` first to generate K-Means clusters and to identify top transcription factors (TFs). Lists of the significantly-changed TFs will be generated in the folder `results/taiji_results_analysis/cls-5.rep-0/TF_results` 
     ```bash
     Rscript scripts/taiji/post_taiji_analysis.0.R \
     results/taiji_results \
@@ -213,7 +213,7 @@
     # results/taiji_results_analysis: save folder base
     ```
    
-11. Finally, run the following commands to derive the significantly-changed (TF -> regulatee gene) edges and the results will be generated in the folder `results/taiji_results_analysis/cls-5.rep-0/edge_results`.
+12. Finally, run the following commands to derive the significantly-changed (TF -> regulatee gene) edges and the results will be generated in the folder `results/taiji_results_analysis/cls-5.rep-0/edge_results`.
     ```bash 
     Rscript scripts/taiji/prepare_edges.1.R \
     results/taiji_results \
