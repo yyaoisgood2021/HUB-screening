@@ -39,7 +39,7 @@ chrid_list = (['chr{}'.format(i) for i in range(1,9)] + ['chr{}'.format(i) for i
     + ['before_translocg.chr9', 'before_translocg.chr22', 'after_translocg.chr9', 'after_translocg.chr22'])
 
 sample_type_dict = dict(zip(
-    list(meta_df['taiji_id_old']),
+    list(meta_df['taiji_id']),
     list(meta_df['km.cluster']))
 )
 
@@ -88,7 +88,7 @@ def calc_entropy_psbulk_2(dt_all, chrid_list):
 
 
 #%%
-sample_type_list = list(meta_df['taiji_id_old'])
+sample_type_list = list(meta_df['taiji_id'])
 N_sample = len(sample_type_list)
 result_df = pd.DataFrame(data = np.zeros((N_sample, len(chrid_list)+2)), columns = ['psbulk.sample','km.cls']+chrid_list)
 #%% load dt
