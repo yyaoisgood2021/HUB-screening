@@ -176,7 +176,9 @@ to calculate entropy, you need to prepare `overlapped_data` according to the pro
    overlap_result_save_folder="entropy/overlap_results.hg19"
    overlap_result_file_base="overlap" # modify this line or the python code accordingly
    result_save_folder="entropy/results" # path to the folder to save output of this code
-   meta_df_path="results/taiji_results_analysis/cls-5.rep-0/meta_df.2.txt" # modify this line according to your Taiji results
+   meta_df_path="results/taiji_results_analysis/cls-5.rep-0/meta_df.2.txt"
+   # modify this line according to your Taiji results
+   # also, you may want to change path in `scripts/calc_entropy_1D.all_psbulk_cluster.py` accordingly
 
    python scripts/calc_entropy_1D.all_psbulk_cluster.py \
    ${overlap_result_save_folder} \
