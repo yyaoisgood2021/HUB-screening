@@ -56,7 +56,7 @@ def calc_entropy_psbulk_1(sample_type, dt_folder, chrid_list, overlap_file_base)
         # open overlapped peak dt
         dt = pd.read_csv(os.path.join(
             dt_folder,
-            '{}.{}.{}.txt'.format(overlap_file_base, chrid, sample_type)
+            '{}.{}.{}.txt'.format(overlap_file_base, chrid, sample_type.replace("_", "-"))
             ), sep='\t', header=None, 
             dtype={6:'string', }
         )
